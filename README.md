@@ -4,6 +4,9 @@
 
 静的HTMLプロトタイプ（`nagi-site/`）をデザイン・コピー・コンポーネント構造の一次ソースとして、Next.js（App Router）+ TypeScript で本実装したものです。
 
+**Live**: [nagi-nextjs.vercel.app](https://nagi-nextjs.vercel.app/)
+**Repository**: [github.com/studio-poplar/nagi-nextjs](https://github.com/studio-poplar/nagi-nextjs)
+
 ## セットアップ
 
 ```bash
