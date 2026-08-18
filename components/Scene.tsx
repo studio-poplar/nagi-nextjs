@@ -114,6 +114,9 @@ export interface SceneProps {
    * overlaid on top (hero / subhero). Ignored in illustration mode, where the
    * hand-tuned vignette already handles contrast. Defaults to 0.35. */
   photoOverlay?: number;
+  /** CSS brightness() multiplier for the photo itself, 1 = unchanged. Set per
+   * image in the admin panel's image manager. Ignored in illustration mode. */
+  brightness?: number;
 }
 
 export default function Scene({
@@ -126,6 +129,7 @@ export default function Scene({
   className = "",
   photo,
   photoOverlay,
+  brightness,
 }: SceneProps) {
   const waves = WAVES[mood];
   const heights = WAVE_HEIGHTS[mood];
@@ -142,7 +146,10 @@ export default function Scene({
           alt=""
           fill
           sizes="(max-width: 768px) 100vw, 50vw"
-          style={{ objectFit: "cover" }}
+          style={{
+            objectFit: "cover",
+            filter: brightness !== undefined && brightness !== 1 ? `brightness(${brightness})` : undefined,
+          }}
         />
         <div className="photo-overlay" style={{ opacity: photoOverlay ?? 0.35 }} />
         <div className="grain" />

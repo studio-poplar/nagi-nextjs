@@ -1,8 +1,9 @@
 import Link from "next/link";
 import Scene from "./Scene";
-import type { Location } from "@/lib/content";
+import { getImageBrightness, type Location } from "@/lib/content";
 
 export default function LocationCard({ location }: { location: Location }) {
+  const photo = `/images/location-${location.id}.jpg`;
   return (
     <article className="loc-card">
       <Scene
@@ -11,7 +12,8 @@ export default function LocationCard({ location }: { location: Location }) {
         showBoat={location.showBoat}
         sunPosition={location.sunPosition}
         aspect="4 / 3"
-        photo={`/images/location-${location.id}.jpg`}
+        photo={photo}
+        brightness={getImageBrightness(`location-${location.id}.jpg`)}
       />
       <div className="loc-card-body">
         <span className="region">{location.region}</span>

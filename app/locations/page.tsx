@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Scene from "@/components/Scene";
 import Button from "@/components/Button";
 import Lines from "@/components/Lines";
-import { getSiteData } from "@/lib/content";
+import { getImageBrightness, getSiteData } from "@/lib/content";
 
 export async function generateMetadata(): Promise<Metadata> {
   const { locationsPage } = getSiteData();
@@ -28,6 +28,7 @@ export default function LocationsPage() {
           sunPosition={{ top: "8%", left: "70%", size: 180 }}
           photo="/images/locations-subhero.jpg"
           photoOverlay={locationsPage.subhero.overlayOpacity}
+          brightness={getImageBrightness("locations-subhero.jpg")}
         />
         <div className="subhero-inner wrap">
           <span className="eyebrow">{locationsPage.subhero.eyebrow}</span>
@@ -59,6 +60,7 @@ export default function LocationsPage() {
                   aspect="4 / 5"
                   className="concept-figure"
                   photo={`/images/location-${location.id}.jpg`}
+                  brightness={getImageBrightness(`location-${location.id}.jpg`)}
                 />
               </div>
               <div data-reveal style={flipped ? { order: 1 } : undefined}>

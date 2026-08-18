@@ -8,7 +8,7 @@ import PlanCard from "@/components/PlanCard";
 import DayStep from "@/components/DayStep";
 import VoiceCard from "@/components/VoiceCard";
 import JournalCard from "@/components/JournalCard";
-import { getSiteData } from "@/lib/content";
+import { getImageBrightness, getSiteData } from "@/lib/content";
 
 export async function generateMetadata(): Promise<Metadata> {
   const { home } = getSiteData();
@@ -29,6 +29,7 @@ export default function HomePage() {
           sunPosition={{ top: "5%", left: "63%", size: 230 }}
           photo="/images/hero-uchibo-dawn.jpg"
           photoOverlay={home.hero.overlayOpacity}
+          brightness={getImageBrightness("hero-uchibo-dawn.jpg")}
         />
         <div className="hero-inner wrap">
           <p className="hero-kicker">{home.hero.kicker}</p>
@@ -67,6 +68,7 @@ export default function HomePage() {
               sunPosition={{ top: "10%", left: "60%", size: 120 }}
               className="concept-figure"
               photo="/images/concept-life.jpg"
+              brightness={getImageBrightness("concept-life.jpg")}
             />
           </div>
         </div>

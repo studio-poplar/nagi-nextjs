@@ -2,6 +2,7 @@
 
 import { useState, type ChangeEvent } from "react";
 import type { ImageSlot } from "@/lib/images";
+import { RangeField } from "./fields";
 
 interface SlotState extends ImageSlot {
   version: number;
@@ -51,10 +52,23 @@ export default function ImageManager({ initialSlots }: { initialSlots: ImageSlot
     }
   }
 
+  async function handleBrightnessCommit(slot: SlotState, brightness: number) {
+    try {
+      const res = await fetch("/api/admin/image-settings", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ filename: slot.filename, brightness }),
+      });
+      if (!res.ok) throw new Error(await res.text());
+    } catch (err) {
+      patchSlot(slot.key, { error: String(err) });
+    }
+  }
+
   return (
     <div className="admin-body">
       <p className="admin-field-hint">
-        画像を選ぶと自動的に <code>public/images/</code> に保存され、対応するセクションが即座にイラストから差し替わります（サイトのタブを再読み込みして確認してください）。「削除」するとイラスト表示に戻ります。
+        画像を選ぶと自動的に <code>public/images/</code> に保存され、対応するセクションが即座にイラストから差し替わります（サイトのタブを再読み込みして確認してください）。「削除」するとイラスト表示に戻ります。画像ごとに照度（明るさ）も調整できます。
       </p>
       <div className="admin-image-grid">
         {slots.map((slot) => (
@@ -62,7 +76,11 @@ export default function ImageManager({ initialSlots }: { initialSlots: ImageSlot
             <div className="admin-image-thumb">
               {slot.exists ? (
                 // eslint-disable-next-line @next/next/no-img-element -- admin-only local preview, no need for next/image optimization
-                <img src={`/images/${slot.filename}?v=${slot.version}`} alt={slot.label} />
+                <img
+                  src={`/images/${slot.filename}?v=${slot.version}`}
+                  alt={slot.label}
+                  style={{ filter: slot.brightness !== 1 ? `brightness(${slot.brightness})` : undefined }}
+                />
               ) : (
                 <span className="admin-image-placeholder">イラスト表示中</span>
               )}
@@ -86,6 +104,17 @@ export default function ImageManager({ initialSlots }: { initialSlots: ImageSlot
                 </button>
               )}
             </div>
+            {slot.exists && (
+              <RangeField
+                label="照度"
+                value={slot.brightness}
+                min={0.4}
+                max={1.6}
+                step={0.05}
+                onChange={(v) => patchSlot(slot.key, { brightness: v })}
+                onCommit={(v) => handleBrightnessCommit(slot, v)}
+              />
+            )}
             {slot.error && <p className="admin-status admin-status--error">{slot.error}</p>}
           </div>
         ))}

@@ -65,17 +65,26 @@ export function TextAreaField({
   );
 }
 
-/** 0–1 value edited as a slider with a live percentage readout. */
+/** Numeric value edited as a slider with a live percentage readout (defaults to a 0–1 range). */
 export function RangeField({
   label,
   value,
   onChange,
+  onCommit,
   hint,
+  min = 0,
+  max = 1,
+  step = 0.05,
 }: {
   label: string;
   value: number;
   onChange: (v: number) => void;
+  /** Fires once when the user releases the slider — use for network saves to avoid spamming requests while dragging. */
+  onCommit?: (v: number) => void;
   hint?: string;
+  min?: number;
+  max?: number;
+  step?: number;
 }) {
   return (
     <label className="admin-field">
@@ -84,11 +93,14 @@ export function RangeField({
       </span>
       <input
         type="range"
-        min={0}
-        max={1}
-        step={0.05}
+        min={min}
+        max={max}
+        step={step}
         value={value}
         onChange={(e) => onChange(Number(e.target.value))}
+        onMouseUp={(e) => onCommit?.(Number(e.currentTarget.value))}
+        onTouchEnd={(e) => onCommit?.(Number(e.currentTarget.value))}
+        onKeyUp={(e) => onCommit?.(Number(e.currentTarget.value))}
       />
       {hint && <span className="admin-field-hint">{hint}</span>}
     </label>

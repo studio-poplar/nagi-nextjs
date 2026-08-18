@@ -33,6 +33,7 @@ export interface ImageSlot {
   label: string;
   filename: string;
   exists: boolean;
+  brightness: number;
 }
 
 /** Derives the full list of image slots the site actually uses, so it always
@@ -41,6 +42,7 @@ export interface ImageSlot {
 export function getImageSlots(siteData: {
   locations: { id: string; name: string }[];
   journalEntries: { slug: string; title: string }[];
+  imageSettings: Record<string, { brightness?: number }>;
 }): ImageSlot[] {
   const slots: { key: string; label: string; filename: string }[] = [
     { key: "hero", label: "トップページ ヒーロー", filename: "hero-uchibo-dawn.jpg" },
@@ -58,5 +60,9 @@ export function getImageSlots(siteData: {
     })),
   ];
 
-  return slots.map((s) => ({ ...s, exists: publicImageExists(`images/${s.filename}`) }));
+  return slots.map((s) => ({
+    ...s,
+    exists: publicImageExists(`images/${s.filename}`),
+    brightness: siteData.imageSettings?.[s.filename]?.brightness ?? 1,
+  }));
 }

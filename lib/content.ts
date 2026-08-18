@@ -98,7 +98,14 @@ interface SectionHeadCopy {
   overlayOpacity?: number;
 }
 
+export interface ImageSetting {
+  /** CSS brightness() multiplier, 1 = unchanged. */
+  brightness?: number;
+}
+
 export interface SiteData {
+  /** Per-image adjustments (brightness, etc.), keyed by filename under public/images/. */
+  imageSettings: Record<string, ImageSetting>;
   site: { titleDefault: string; titleTemplate: string; description: string };
   footer: { tagline: string; copyright: string; disclaimer: string };
   home: {
@@ -180,4 +187,16 @@ export function getLocation(id: LocationId): Location {
 /** Used only by the local-dev-only /admin API route. */
 export function saveSiteData(data: SiteData): void {
   fs.writeFileSync(SITE_JSON_PATH, JSON.stringify(data, null, 2) + "\n", "utf-8");
+}
+
+/** CSS brightness() multiplier for an image, keyed by its public/images/ filename. Defaults to 1 (unchanged). */
+export function getImageBrightness(filename: string): number {
+  return getSiteData().imageSettings?.[filename]?.brightness ?? 1;
+}
+
+/** Used only by the local-dev-only /admin API route — merges one image's settings without touching the rest of site.json. */
+export function setImageSetting(filename: string, setting: ImageSetting): void {
+  const data = getSiteData();
+  data.imageSettings = { ...data.imageSettings, [filename]: { ...data.imageSettings?.[filename], ...setting } };
+  saveSiteData(data);
 }

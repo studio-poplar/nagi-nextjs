@@ -1,4 +1,9 @@
 {
+  "imageSettings": {
+    "hero-uchibo-dawn.jpg": {
+      "brightness": 1
+    }
+  },
   "site": {
     "titleDefault": "凪 NAGI ｜ 海のセカンドホーム",
     "titleTemplate": "%s ｜ 凪 NAGI",
