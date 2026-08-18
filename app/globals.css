@@ -564,7 +564,6 @@ h2.section-title {
   font-family: var(--f-mono);
   font-size: 13px;
   letter-spacing: 0.16em;
-  color: var(--sand);
   opacity: 0.85;
   display: flex;
   align-items: center;
@@ -586,7 +585,6 @@ h2.section-title {
   font-size: clamp(16px, 2vw, 20px);
   max-width: 30em;
   margin-top: 22px;
-  color: var(--sand);
 }
 .hero-actions {
   margin-top: 36px;
@@ -1030,9 +1028,6 @@ footer.site-footer {
   padding-block: 44px;
   color: var(--paper);
 }
-.subhero-inner .eyebrow {
-  color: var(--sand);
-}
 .subhero-inner .eyebrow::before {
   background: var(--sand);
 }
@@ -1046,7 +1041,6 @@ footer.site-footer {
 .subhero-inner p {
   margin-top: 16px;
   max-width: 36em;
-  color: var(--sand);
   opacity: 0.92;
   font-size: 15.5px;
 }
@@ -1405,6 +1399,20 @@ details.faq p {
 .admin-field input[type="range"] {
   width: 100%;
   accent-color: var(--flag);
+}
+.admin-color-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.admin-field input[type="color"] {
+  width: 48px;
+  height: 36px;
+  padding: 2px;
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  cursor: pointer;
+  background: var(--paper);
 }
 .admin-field-hint {
   font-size: 12px;

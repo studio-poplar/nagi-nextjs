@@ -88,13 +88,23 @@ interface CtaCopy {
   secondaryCta?: string;
 }
 
-interface SectionHeadCopy {
+/** Legibility controls for copy overlaid on a Scene photo (hero/subhero only). */
+export interface PhotoTextStyle {
+  /** 0–1 darkening over the photo. Ignored in illustration mode, where the
+   * hand-tuned vignette already handles contrast. Defaults to 0.35. */
+  overlayOpacity?: number;
+  /** CSS color for the overlaid text. Defaults to the brand's paper/sand tone. */
+  textColor?: string;
+  /** CSS color for an optional solid panel behind the text block. Unset/omitted = no panel. */
+  textBackgroundColor?: string;
+  /** 0–1 opacity of the text background panel. 0 or unset = no panel shown. */
+  textBackgroundOpacity?: number;
+}
+
+interface SectionHeadCopy extends PhotoTextStyle {
   eyebrow: string;
   heading: string;
   lead?: string;
-  /** 0–1 darkening over a photo, for sections where copy overlays the Scene
-   * image (hero/subhero). Ignored elsewhere. */
-  overlayOpacity?: number;
 }
 
 export interface ImageSetting {
@@ -110,7 +120,7 @@ export interface SiteData {
   home: {
     metaTitle: string;
     metaDescription: string;
-    hero: {
+    hero: PhotoTextStyle & {
       kicker: string;
       heading: string;
       lead: string;
@@ -118,8 +128,6 @@ export interface SiteData {
       secondaryCta: string;
       metaLine1: string;
       metaLine2: string;
-      /** 0–1 darkening over the hero photo, for text legibility. */
-      overlayOpacity?: number;
     };
     concept: { eyebrow: string; heading: string; paragraph1: string; paragraph2: string };
     locationsSection: SectionHeadCopy;

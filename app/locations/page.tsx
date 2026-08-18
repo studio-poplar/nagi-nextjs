@@ -3,6 +3,7 @@ import Scene from "@/components/Scene";
 import Button from "@/components/Button";
 import Lines from "@/components/Lines";
 import { getImageBrightness, getSiteData } from "@/lib/content";
+import { photoTextStyle } from "@/lib/color";
 
 export async function generateMetadata(): Promise<Metadata> {
   const { locationsPage } = getSiteData();
@@ -30,7 +31,7 @@ export default function LocationsPage() {
           photoOverlay={locationsPage.subhero.overlayOpacity}
           brightness={getImageBrightness("locations-subhero.jpg")}
         />
-        <div className="subhero-inner wrap">
+        <div className="subhero-inner wrap" style={photoTextStyle(locationsPage.subhero)}>
           <span className="eyebrow">{locationsPage.subhero.eyebrow}</span>
           <h1>
             <Lines text={locationsPage.subhero.heading} />

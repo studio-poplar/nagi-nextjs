@@ -9,6 +9,7 @@ import DayStep from "@/components/DayStep";
 import VoiceCard from "@/components/VoiceCard";
 import JournalCard from "@/components/JournalCard";
 import { getImageBrightness, getSiteData } from "@/lib/content";
+import { photoTextStyle } from "@/lib/color";
 
 export async function generateMetadata(): Promise<Metadata> {
   const { home } = getSiteData();
@@ -30,7 +31,7 @@ export default function HomePage() {
           photoOverlay={home.hero.overlayOpacity}
           brightness={getImageBrightness("hero-uchibo-dawn.jpg")}
         />
-        <div className="hero-inner wrap">
+        <div className="hero-inner wrap" style={photoTextStyle(home.hero)}>
           <p className="hero-kicker">{home.hero.kicker}</p>
           <h1>{home.hero.heading}</h1>
           <p className="hero-copy">{home.hero.lead}</p>

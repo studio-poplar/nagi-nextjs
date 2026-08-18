@@ -107,6 +107,38 @@ export function RangeField({
   );
 }
 
+/** Color picker with a "reset to brand default" escape hatch, since the value
+ * is normally an optional override (empty string = use the CSS default). */
+export function ColorField({
+  label,
+  value,
+  onChange,
+  fallback,
+  hint,
+}: {
+  label: string;
+  value: string;
+  onChange: (v: string) => void;
+  /** Swatch color shown while value is unset. */
+  fallback: string;
+  hint?: string;
+}) {
+  return (
+    <label className="admin-field">
+      <span className="admin-field-label">{label}</span>
+      <div className="admin-color-row">
+        <input type="color" value={value || fallback} onChange={(e) => onChange(e.target.value)} />
+        {value && (
+          <button type="button" className="admin-remove-btn" onClick={() => onChange("")}>
+            既定に戻す
+          </button>
+        )}
+      </div>
+      {hint && <span className="admin-field-hint">{hint}</span>}
+    </label>
+  );
+}
+
 /** Edits a string[] as one item per line — much simpler than per-item add/remove buttons. */
 export function ListField({
   label,
