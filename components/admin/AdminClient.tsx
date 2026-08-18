@@ -5,6 +5,7 @@ import type { SiteData } from "@/lib/content";
 import type { ImageSlot } from "@/lib/images";
 import { ColorField, Field, ListField, RangeField, Section, TextAreaField, setDeep } from "./fields";
 import ImageManager from "./ImageManager";
+import { errorMessage } from "@/lib/errors";
 
 interface Props {
   initialData: SiteData;
@@ -37,22 +38,34 @@ export default function AdminClient({ initialData, initialSlots }: Props) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
       });
-      if (!res.ok) throw new Error(await res.text());
-      setStatus({ type: "ok", message: "保存しました。サイトのタブを再読み込みすると反映されます。" });
+      if (!res.ok) throw new Error((await res.json().catch(() => null))?.error ?? (await res.text()));
+      setStatus({
+        type: "ok",
+        message: "GitHubにコミットしました。Vercelが自動で再デプロイします（反映まで30秒〜1分ほどかかります）。",
+      });
     } catch (e) {
-      setStatus({ type: "error", message: `保存に失敗しました：${String(e)}` });
+      setStatus({ type: "error", message: `保存に失敗しました：${errorMessage(e)}` });
     } finally {
       setSaving(false);
     }
   }
 
+  async function handleLogout() {
+    await fetch("/api/admin/logout", { method: "POST" });
+    window.location.reload();
+  }
+
   return (
     <div className="admin-wrap">
       <header className="admin-header">
-        <h1>凪 NAGI 管理画面</h1>
+        <div className="admin-header-top">
+          <h1>凪 NAGI 管理画面</h1>
+          <button type="button" className="admin-remove-btn" onClick={handleLogout}>
+            ログアウト
+          </button>
+        </div>
         <p>
-          ローカル編集専用です。保存すると <code>content/site.json</code> に書き込まれます。GitHub
-          Desktopでいつも通り commit / push すると本番（Vercel）に反映されます。
+          保存すると GitHub リポジトリへ直接コミットされ、Vercelが自動で再デプロイします。反映まで30秒〜1分ほどかかります（保存直後はまだ古い内容が表示されます）。
         </p>
         <div className="admin-tabs">
           <button type="button" className={tab === "text" ? "active" : ""} onClick={() => setTab("text")}>

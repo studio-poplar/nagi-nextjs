@@ -3,16 +3,28 @@
 import { useState, type ChangeEvent } from "react";
 import type { ImageSlot } from "@/lib/images";
 import { RangeField } from "./fields";
+import { errorMessage } from "@/lib/errors";
 
 interface SlotState extends ImageSlot {
   version: number;
   busy: boolean;
   error: string | null;
+  /** Local object URL for the file just picked — shown instantly instead of the
+   * real /images/ path, since a GitHub-committed image only actually becomes
+   * servable once Vercel finishes redeploying (30–60s later). */
+  previewUrl: string | null;
+  /** True once a change has been committed but the page hasn't confirmed it's live yet. */
+  pendingDeploy: boolean;
+}
+
+async function extractError(res: Response): Promise<string> {
+  const body = (await res.json().catch(() => null)) as { error?: string } | null;
+  return body?.error ?? (await res.text().catch(() => `HTTP ${res.status}`));
 }
 
 export default function ImageManager({ initialSlots }: { initialSlots: ImageSlot[] }) {
   const [slots, setSlots] = useState<SlotState[]>(
-    initialSlots.map((s) => ({ ...s, version: 0, busy: false, error: null }))
+    initialSlots.map((s) => ({ ...s, version: 0, busy: false, error: null, previewUrl: null, pendingDeploy: false }))
   );
 
   function patchSlot(key: string, patch: Partial<SlotState>) {
@@ -24,16 +36,19 @@ export default function ImageManager({ initialSlots }: { initialSlots: ImageSlot
     e.target.value = "";
     if (!file) return;
 
-    patchSlot(slot.key, { busy: true, error: null });
+    if (slot.previewUrl) URL.revokeObjectURL(slot.previewUrl);
+    const previewUrl = URL.createObjectURL(file);
+    patchSlot(slot.key, { busy: true, error: null, previewUrl });
+
     try {
       const formData = new FormData();
       formData.append("filename", slot.filename);
       formData.append("file", file);
       const res = await fetch("/api/admin/upload", { method: "POST", body: formData });
-      if (!res.ok) throw new Error(await res.text());
-      patchSlot(slot.key, { busy: false, exists: true, version: slot.version + 1 });
+      if (!res.ok) throw new Error(await extractError(res));
+      patchSlot(slot.key, { busy: false, exists: true, pendingDeploy: true, version: slot.version + 1 });
     } catch (err) {
-      patchSlot(slot.key, { busy: false, error: String(err) });
+      patchSlot(slot.key, { busy: false, error: errorMessage(err), previewUrl: null });
     }
   }
 
@@ -45,10 +60,17 @@ export default function ImageManager({ initialSlots }: { initialSlots: ImageSlot
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ filename: slot.filename }),
       });
-      if (!res.ok) throw new Error(await res.text());
-      patchSlot(slot.key, { busy: false, exists: false, version: slot.version + 1 });
+      if (!res.ok) throw new Error(await extractError(res));
+      if (slot.previewUrl) URL.revokeObjectURL(slot.previewUrl);
+      patchSlot(slot.key, {
+        busy: false,
+        exists: false,
+        pendingDeploy: true,
+        previewUrl: null,
+        version: slot.version + 1,
+      });
     } catch (err) {
-      patchSlot(slot.key, { busy: false, error: String(err) });
+      patchSlot(slot.key, { busy: false, error: errorMessage(err) });
     }
   }
 
@@ -59,25 +81,26 @@ export default function ImageManager({ initialSlots }: { initialSlots: ImageSlot
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ filename: slot.filename, brightness }),
       });
-      if (!res.ok) throw new Error(await res.text());
+      if (!res.ok) throw new Error(await extractError(res));
+      patchSlot(slot.key, { pendingDeploy: true });
     } catch (err) {
-      patchSlot(slot.key, { error: String(err) });
+      patchSlot(slot.key, { error: errorMessage(err) });
     }
   }
 
   return (
     <div className="admin-body">
       <p className="admin-field-hint">
-        画像を選ぶと自動的に <code>public/images/</code> に保存され、対応するセクションが即座にイラストから差し替わります（サイトのタブを再読み込みして確認してください）。「削除」するとイラスト表示に戻ります。画像ごとに照度（明るさ）も調整できます。
+        画像を選ぶとGitHubへ直接コミットされ、Vercelが自動で再デプロイします（反映まで30秒〜1分）。「削除」するとイラスト表示に戻ります。画像ごとに照度（明るさ）も調整できます。
       </p>
       <div className="admin-image-grid">
         {slots.map((slot) => (
           <div className="admin-image-card" key={slot.key}>
             <div className="admin-image-thumb">
-              {slot.exists ? (
-                // eslint-disable-next-line @next/next/no-img-element -- admin-only local preview, no need for next/image optimization
+              {slot.previewUrl || slot.exists ? (
+                // eslint-disable-next-line @next/next/no-img-element -- admin-only preview, no need for next/image optimization
                 <img
-                  src={`/images/${slot.filename}?v=${slot.version}`}
+                  src={slot.previewUrl ?? `/images/${slot.filename}?v=${slot.version}`}
                   alt={slot.label}
                   style={{ filter: slot.brightness !== 1 ? `brightness(${slot.brightness})` : undefined }}
                 />
@@ -86,7 +109,10 @@ export default function ImageManager({ initialSlots }: { initialSlots: ImageSlot
               )}
             </div>
             <p className="admin-image-label">{slot.label}</p>
-            <p className="admin-field-hint">{slot.filename}</p>
+            <p className="admin-field-hint">
+              {slot.filename}
+              {slot.pendingDeploy && " ・ 反映待ち"}
+            </p>
             <div className="admin-image-actions">
               <label className="btn admin-upload-btn">
                 {slot.busy ? "処理中…" : slot.exists ? "差し替え" : "アップロード"}

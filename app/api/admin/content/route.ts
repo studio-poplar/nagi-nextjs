@@ -1,18 +1,20 @@
 import { NextResponse } from "next/server";
 import { getSiteData, saveSiteData, type SiteData } from "@/lib/content";
-
-function isDev() {
-  return process.env.NODE_ENV === "development";
-}
+import { isAuthenticated } from "@/lib/auth";
+import { errorMessage } from "@/lib/errors";
 
 export async function GET() {
-  if (!isDev()) return NextResponse.json({ error: "Not available in production" }, { status: 403 });
+  if (!(await isAuthenticated())) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   return NextResponse.json(getSiteData());
 }
 
 export async function POST(request: Request) {
-  if (!isDev()) return NextResponse.json({ error: "Not available in production" }, { status: 403 });
+  if (!(await isAuthenticated())) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   const data = (await request.json()) as SiteData;
-  saveSiteData(data);
+  try {
+    await saveSiteData(data);
+  } catch (err) {
+    return NextResponse.json({ error: errorMessage(err) }, { status: 500 });
+  }
   return NextResponse.json({ ok: true });
 }

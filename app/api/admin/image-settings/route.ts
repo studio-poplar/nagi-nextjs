@@ -1,13 +1,11 @@
 import { NextResponse } from "next/server";
 import { setImageSetting } from "@/lib/content";
 import { isValidImageFilename } from "@/lib/images";
-
-function isDev() {
-  return process.env.NODE_ENV === "development";
-}
+import { isAuthenticated } from "@/lib/auth";
+import { errorMessage } from "@/lib/errors";
 
 export async function POST(request: Request) {
-  if (!isDev()) return NextResponse.json({ error: "Not available in production" }, { status: 403 });
+  if (!(await isAuthenticated())) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
   const { filename, brightness } = (await request.json()) as { filename?: string; brightness?: number };
 
@@ -18,6 +16,10 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Invalid brightness" }, { status: 400 });
   }
 
-  setImageSetting(filename, { brightness });
+  try {
+    await setImageSetting(filename, { brightness });
+  } catch (err) {
+    return NextResponse.json({ error: errorMessage(err) }, { status: 500 });
+  }
   return NextResponse.json({ ok: true });
 }

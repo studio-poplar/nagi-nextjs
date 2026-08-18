@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import type { SceneLandmark, SceneMood } from "@/components/Scene";
+import { putFile } from "./github";
 
 export type LocationId = "uchibo" | "noto" | "awaji" | "goto";
 
@@ -191,9 +192,12 @@ export function getLocation(id: LocationId): Location {
   return location;
 }
 
-/** Used only by the local-dev-only /admin API route. */
-export function saveSiteData(data: SiteData): void {
-  fs.writeFileSync(SITE_JSON_PATH, JSON.stringify(data, null, 2) + "\n", "utf-8");
+/** Used only by the /admin API routes. Commits the new content/site.json straight to
+ * GitHub — Vercel's production filesystem is read-only, so this can't be a local
+ * fs.writeFileSync. The commit triggers Vercel's auto-redeploy, so changes take
+ * roughly 30–60s to go live rather than being instant. */
+export async function saveSiteData(data: SiteData): Promise<void> {
+  await putFile("content/site.json", JSON.stringify(data, null, 2) + "\n", "content: update site.json via admin panel");
 }
 
 /** CSS brightness() multiplier for an image, keyed by its public/images/ filename. Defaults to 1 (unchanged). */
@@ -201,9 +205,9 @@ export function getImageBrightness(filename: string): number {
   return getSiteData().imageSettings?.[filename]?.brightness ?? 1;
 }
 
-/** Used only by the local-dev-only /admin API route — merges one image's settings without touching the rest of site.json. */
-export function setImageSetting(filename: string, setting: ImageSetting): void {
+/** Used only by the /admin API routes — merges one image's settings without touching the rest of site.json. */
+export async function setImageSetting(filename: string, setting: ImageSetting): Promise<void> {
   const data = getSiteData();
   data.imageSettings = { ...data.imageSettings, [filename]: { ...data.imageSettings?.[filename], ...setting } };
-  saveSiteData(data);
+  await saveSiteData(data);
 }

@@ -44,30 +44,40 @@ npm run lint    # ESLint
 
 ```
 app/                 各ページ（App Router）
-app/admin/           管理画面（ローカル開発専用。本番では自動的に無効化）
-app/api/admin/       管理画面用API（content保存・画像アップロード。ローカル開発専用）
+app/admin/           管理画面（本番URLでも利用可。パスワード認証必須）
+app/api/admin/       管理画面用API（login/logout/content保存/画像アップロード・照度設定）
 components/          Header / Footer / TideTicker / Scene / WaveDivider / Button / 各種カード / ApplyForm
 components/admin/    管理画面のUIコンポーネント
 content/site.json    サイト全文言・拠点・プラン・Journal記事などのデータ（唯一のソース）
-lib/content.ts       content/site.json を読み込むアクセサ（getSiteData / saveSiteData）
-lib/images.ts        public/images/ の画像スロット管理
-public/images/       アップロードされた実写画像の置き場所（ファイル名の規約は下記「管理画面」参照）
+lib/content.ts       content/site.json を読み込むアクセサ（getSiteData）と、GitHub経由の保存関数（saveSiteData等）
+lib/github.ts         GitHub Contents API クライアント（管理画面の保存はすべてこれ経由でコミット）
+lib/auth.ts           管理画面のパスワード認証・セッションCookie
+lib/images.ts         public/images/ の画像スロット管理
+public/images/       画像の置き場所（ファイル名の規約は下記「管理画面」参照）
 ```
 
-## 管理画面（ローカル編集専用）
+## 管理画面
 
-```bash
-npm run dev
-```
+[/admin](https://nagi-nextjs.vercel.app/admin) はパスワード認証つきで、本番URL・ローカル開発のどちらでも使えます。
 
-を起動した状態で [http://localhost:3000/admin](http://localhost:3000/admin) を開くと、以下ができます。
+- **文言編集**：全ページの見出し・リード文・拠点データ・プラン・FAQ・航海日誌記事・ヒーロー/サブヒーローの文字色や背景などを編集し「保存する」
+- **画像管理**：各セクション（Hero・Concept・4拠点・拠点ページSubhero・航海日誌記事）に画像をアップロード／照度調整／削除
 
-- **文言編集**：全ページの見出し・リード文・拠点データ・プラン・FAQ・航海日誌記事などを編集し「保存する」で `content/site.json` に書き込み
-- **画像管理**：各セクション（Hero・Concept・4拠点・拠点ページSubhero・航海日誌記事）に画像をアップロード。ファイルは自動的に `public/images/` の規定のファイル名で保存され、対応するSceneコンポーネントがイラストから実写画像に自動的に切り替わります（未アップロードの間はイラストのまま）
+Vercelはサーバーレスでファイル書き込みができないため、保存操作は**GitHubリポジトリへ直接コミット**する方式です。保存すると `content/site.json`（または `public/images/` 配下の画像）がコミットされ、Vercelの自動デプロイが走ります。**反映まで30秒〜1分ほどかかります**（保存直後はまだ古い内容のままです）。
 
-編集後は GitHub Desktop 等でいつも通り commit / push すれば、Vercelが自動で本番に反映します。
+### 必要な環境変数
 
-管理画面はローカルの `npm run dev` でのみ動作します（`process.env.NODE_ENV === "development"` でガード）。本番ビルドでは `/admin` は常に「ローカル開発環境でのみ利用できます」という静的なメッセージのみが表示され、管理画面のUIコード自体もバンドルに含まれません。`/api/admin/*` も本番では常に403を返します。ファイル書き込みを伴う機能のため、意図的にVercel上では機能しない設計です。
+Vercelプロジェクトの Settings → Environment Variables に以下を設定してください（ローカルで動かす場合は `.env.local` に同じ内容を、リポジトリにはコミットしないでください）。
+
+| 変数名 | 内容 |
+|---|---|
+| `ADMIN_PASSWORD` | 管理画面のログインパスワード（任意の文字列） |
+| `GITHUB_TOKEN` | `studio-poplar/nagi-nextjs` への書き込み権限を持つ GitHub Personal Access Token |
+| `GITHUB_BRANCH` | 省略可。コミット先ブランチ（既定は `master`） |
+
+**GITHUB_TOKEN の発行手順**：GitHubの [Fine-grained personal access tokens](https://github.com/settings/personal-access-tokens/new) から、Repository access を `studio-poplar/nagi-nextjs` に限定し、Permissions の **Contents** を **Read and write** に設定して発行してください。発行したトークンは再表示できないので、控えてから上記の環境変数に設定します。
+
+環境変数を設定後、Vercelで再デプロイ（または次のpushで自動反映）すれば管理画面が使えるようになります。
 
 ## 実装メモ（プロトタイプからの変更点）
 
@@ -75,7 +85,7 @@ npm run dev
 - **拠点ページの交互レイアウト**: 指示書 §6.2 は「画像左右→テキスト、次は逆」の交互レイアウトを明記していますが、配布された静的プロトタイプの `order` 指定は実際には4拠点すべてで画像が左側に固定される実装になっていました（背景色のみ交互）。本実装では指示書の記述通り、拠点ごとに画像/テキストの左右を交互に入れ替えています。
 - **Tailwind構成**: `create-next-app` の最新安定版は Tailwind CSS v4（CSS-first設定）を採用しており、`tailwind.config.ts` は生成されません。トークンは `app/globals.css` 内の `@theme inline` ブロックで `nagi-*` プレフィックス付きユーティリティとして登録し、プロトタイプ由来のCSS変数（`--sand` 等）と対応づけています。
 - **Scene コンポーネント**: 波のpathやランドマークの形状は代表例としてmood（`dawn` / `dusk` / `overcast` / `noon`）ごとに1パターンへ統一・再利用可能化しています（プロトタイプ側は同一moodでも配置ごとに微妙にpathが異なる装飾的なバリエーションでした）。`photo` propに実写画像パスを渡すと、そのファイルが存在する場合のみイラストから実写に自動的に差し替わります（`lib/images.ts` の `publicImageExists` によるサーバーサイドでのファイル存在チェック）。
-- **CMS/管理画面**: 当初の指示書では「CMS連携は不要（記事データはハードコード）」というスコープでしたが、その後クライアントからの追加依頼により、ローカル編集専用の管理画面（`/admin`）を実装しています。データは単一の `content/site.json` に集約し、`lib/content.ts` の `getSiteData()` がリクエストのたびにファイルを読み直す設計（Node標準の `fs.readFileSync`、モジュールキャッシュに依存しない）にすることで、管理画面で保存した内容が即座にページへ反映されるようにしています。
+- **CMS/管理画面**: 当初の指示書では「CMS連携は不要（記事データはハードコード）」というスコープでしたが、その後クライアントからの追加依頼により管理画面（`/admin`）を実装しています。データは単一の `content/site.json` に集約し、`lib/content.ts` の `getSiteData()` がリクエストのたびにファイルを読み直す設計（Node標準の `fs.readFileSync`、モジュールキャッシュに依存しない）です。当初はローカル専用（`npm run dev` 限定）でしたが、その後「本番URLでも使えるように」という追加依頼を受け、GitHub Contents API経由でコミットする方式（`lib/github.ts`）とパスワード認証（`lib/auth.ts`）に切り替え、本番でも利用できるようにしています。
 - **ブランドコンセプトの改修**: 初期実装は「全国の漁村を巡る素朴な民宿」でしたが、クライアントからの追加ブリーフ（SANU 2nd Home を参考にした、京都・伊根の舟屋リノベーションによる静かなウェルネス系セカンドホーム）を受けて、NAGIブランドをそのまま維持しつつ「舟屋建築・薪サウナ・ボート係留・静けさ」を軸としたポジショニングに全面的にリライトしています（`docs/ine-funaya-brand-midjourney-briefs.md` にブランド世界観とMidjourneyプロンプト一式）。
 
 ## アクセシビリティ

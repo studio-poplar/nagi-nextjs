@@ -1,7 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
+import { deleteFile, putFile } from "./github";
 
-const IMAGES_DIR = path.join(process.cwd(), "public", "images");
 const VALID_FILENAME = /^[a-zA-Z0-9_-]+\.(jpg|jpeg|png|webp)$/;
 
 export function publicImageExists(relPath: string): boolean {
@@ -12,20 +12,20 @@ export function isValidImageFilename(filename: string): boolean {
   return VALID_FILENAME.test(filename);
 }
 
-export function saveUploadedImage(filename: string, buffer: Buffer): void {
+/** Commits the image straight to GitHub (Vercel's production filesystem is
+ * read-only) — the commit triggers Vercel's auto-redeploy. */
+export async function saveUploadedImage(filename: string, buffer: Buffer): Promise<void> {
   if (!isValidImageFilename(filename)) {
     throw new Error(`Invalid image filename: ${filename}`);
   }
-  fs.mkdirSync(IMAGES_DIR, { recursive: true });
-  fs.writeFileSync(path.join(IMAGES_DIR, filename), buffer);
+  await putFile(`public/images/${filename}`, buffer, `content: upload ${filename} via admin panel`);
 }
 
-export function deleteUploadedImage(filename: string): void {
+export async function deleteUploadedImage(filename: string): Promise<void> {
   if (!isValidImageFilename(filename)) {
     throw new Error(`Invalid image filename: ${filename}`);
   }
-  const target = path.join(IMAGES_DIR, filename);
-  if (fs.existsSync(target)) fs.unlinkSync(target);
+  await deleteFile(`public/images/${filename}`, `content: remove ${filename} via admin panel`);
 }
 
 export interface ImageSlot {

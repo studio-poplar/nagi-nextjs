@@ -1278,6 +1278,12 @@ details.faq p {
   padding: 32px var(--gutter) 120px;
   font-family: var(--f-body);
 }
+.admin-header-top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+}
 .admin-header h1 {
   font-family: var(--f-display);
   font-size: 28px;
