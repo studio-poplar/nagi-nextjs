@@ -65,6 +65,36 @@ export function TextAreaField({
   );
 }
 
+/** 0–1 value edited as a slider with a live percentage readout. */
+export function RangeField({
+  label,
+  value,
+  onChange,
+  hint,
+}: {
+  label: string;
+  value: number;
+  onChange: (v: number) => void;
+  hint?: string;
+}) {
+  return (
+    <label className="admin-field">
+      <span className="admin-field-label">
+        {label}（{Math.round(value * 100)}%）
+      </span>
+      <input
+        type="range"
+        min={0}
+        max={1}
+        step={0.05}
+        value={value}
+        onChange={(e) => onChange(Number(e.target.value))}
+      />
+      {hint && <span className="admin-field-hint">{hint}</span>}
+    </label>
+  );
+}
+
 /** Edits a string[] as one item per line — much simpler than per-item add/remove buttons. */
 export function ListField({
   label,

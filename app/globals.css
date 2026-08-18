@@ -1416,6 +1416,10 @@ details.faq p {
 .admin-field textarea {
   resize: vertical;
 }
+.admin-field input[type="range"] {
+  width: 100%;
+  accent-color: var(--flag);
+}
 .admin-field-hint {
   font-size: 12px;
   color: var(--ink-2);

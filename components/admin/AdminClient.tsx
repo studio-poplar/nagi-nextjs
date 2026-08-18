@@ -3,7 +3,7 @@
 import { useState } from "react";
 import type { SiteData } from "@/lib/content";
 import type { ImageSlot } from "@/lib/images";
-import { Field, ListField, Section, TextAreaField, setDeep } from "./fields";
+import { Field, ListField, RangeField, Section, TextAreaField, setDeep } from "./fields";
 import ImageManager from "./ImageManager";
 
 interface Props {
@@ -95,6 +95,12 @@ export default function AdminClient({ initialData, initialSlots }: Props) {
             <Field label="サブCTAボタン文言" value={data.home.hero.secondaryCta} onChange={(v) => set(["home", "hero", "secondaryCta"], v)} />
             <Field label="右下メタ情報 1行目" value={data.home.hero.metaLine1} onChange={(v) => set(["home", "hero", "metaLine1"], v)} />
             <Field label="右下メタ情報 2行目" value={data.home.hero.metaLine2} onChange={(v) => set(["home", "hero", "metaLine2"], v)} />
+            <RangeField
+              label="画像を暗くする強さ"
+              value={data.home.hero.overlayOpacity ?? 0.35}
+              onChange={(v) => set(["home", "hero", "overlayOpacity"], v)}
+              hint="ヒーロー画像に文字を重ねて表示する際の可読性調整。画像アップロード後、文字が見えにくい場合はここを上げてください（イラスト表示中は影響しません）"
+            />
 
             <h3 className="admin-subhead">コンセプト</h3>
             <Field label="見出し上のラベル" value={data.home.concept.eyebrow} onChange={(v) => set(["home", "concept", "eyebrow"], v)} />
@@ -159,6 +165,12 @@ export default function AdminClient({ initialData, initialSlots }: Props) {
             <Field label="ラベル" value={data.locationsPage.subhero.eyebrow} onChange={(v) => set(["locationsPage", "subhero", "eyebrow"], v)} />
             <TextAreaField label="見出し" value={data.locationsPage.subhero.heading} onChange={(v) => set(["locationsPage", "subhero", "heading"], v)} hint="改行を入れると2行見出しになります" rows={2} />
             <TextAreaField label="リード文" value={data.locationsPage.subhero.lead ?? ""} onChange={(v) => set(["locationsPage", "subhero", "lead"], v)} rows={2} />
+            <RangeField
+              label="画像を暗くする強さ"
+              value={data.locationsPage.subhero.overlayOpacity ?? 0.35}
+              onChange={(v) => set(["locationsPage", "subhero", "overlayOpacity"], v)}
+              hint="サブヒーロー画像に文字を重ねて表示する際の可読性調整。画像アップロード後、文字が見えにくい場合はここを上げてください（イラスト表示中は影響しません）"
+            />
             <h3 className="admin-subhead">CTAバンド</h3>
             <Field label="ラベル" value={data.locationsPage.cta.eyebrow} onChange={(v) => set(["locationsPage", "cta", "eyebrow"], v)} />
             <TextAreaField label="見出し" value={data.locationsPage.cta.heading} onChange={(v) => set(["locationsPage", "cta", "heading"], v)} hint="改行を入れると2行見出しになります" rows={2} />

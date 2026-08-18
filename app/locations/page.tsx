@@ -27,6 +27,7 @@ export default function LocationsPage() {
           fill
           sunPosition={{ top: "8%", left: "70%", size: 180 }}
           photo="/images/locations-subhero.jpg"
+          photoOverlay={locationsPage.subhero.overlayOpacity}
         />
         <div className="subhero-inner wrap">
           <span className="eyebrow">{locationsPage.subhero.eyebrow}</span>
