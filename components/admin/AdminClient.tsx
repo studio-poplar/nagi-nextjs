@@ -3,7 +3,7 @@
 import { useState } from "react";
 import type { SiteData } from "@/lib/content";
 import type { ImageSlot } from "@/lib/images";
-import { Field, ListField, RangeField, Section, TextAreaField, setDeep } from "./fields";
+import { ColorField, Field, ListField, RangeField, Section, TextAreaField, setDeep } from "./fields";
 import ImageManager from "./ImageManager";
 
 interface Props {
@@ -99,7 +99,26 @@ export default function AdminClient({ initialData, initialSlots }: Props) {
               label="画像を暗くする強さ"
               value={data.home.hero.overlayOpacity ?? 0.35}
               onChange={(v) => set(["home", "hero", "overlayOpacity"], v)}
-              hint="ヒーロー画像に文字を重ねて表示する際の可読性調整。画像アップロード後、文字が見えにくい場合はここを上げてください（イラスト表示中は影響しません）"
+              hint="ヒーロー画像全体にかける暗さ。文字が見えにくい場合はここを上げてください（イラスト表示中は影響しません）"
+            />
+            <ColorField
+              label="文字色"
+              value={data.home.hero.textColor ?? ""}
+              onChange={(v) => set(["home", "hero", "textColor"], v)}
+              fallback="#FBF8F1"
+              hint="未設定はブランド既定色（生成り）"
+            />
+            <ColorField
+              label="文字背景の色"
+              value={data.home.hero.textBackgroundColor ?? ""}
+              onChange={(v) => set(["home", "hero", "textBackgroundColor"], v)}
+              fallback="#1C2A33"
+            />
+            <RangeField
+              label="文字背景の濃さ"
+              value={data.home.hero.textBackgroundOpacity ?? 0}
+              onChange={(v) => set(["home", "hero", "textBackgroundOpacity"], v)}
+              hint="0%はパネル非表示。文字の後ろに帯を敷いて可読性を上げたい場合に上げてください"
             />
 
             <h3 className="admin-subhead">コンセプト</h3>
@@ -169,7 +188,26 @@ export default function AdminClient({ initialData, initialSlots }: Props) {
               label="画像を暗くする強さ"
               value={data.locationsPage.subhero.overlayOpacity ?? 0.35}
               onChange={(v) => set(["locationsPage", "subhero", "overlayOpacity"], v)}
-              hint="サブヒーロー画像に文字を重ねて表示する際の可読性調整。画像アップロード後、文字が見えにくい場合はここを上げてください（イラスト表示中は影響しません）"
+              hint="サブヒーロー画像全体にかける暗さ。文字が見えにくい場合はここを上げてください（イラスト表示中は影響しません）"
+            />
+            <ColorField
+              label="文字色"
+              value={data.locationsPage.subhero.textColor ?? ""}
+              onChange={(v) => set(["locationsPage", "subhero", "textColor"], v)}
+              fallback="#FBF8F1"
+              hint="未設定はブランド既定色（生成り）"
+            />
+            <ColorField
+              label="文字背景の色"
+              value={data.locationsPage.subhero.textBackgroundColor ?? ""}
+              onChange={(v) => set(["locationsPage", "subhero", "textBackgroundColor"], v)}
+              fallback="#1C2A33"
+            />
+            <RangeField
+              label="文字背景の濃さ"
+              value={data.locationsPage.subhero.textBackgroundOpacity ?? 0}
+              onChange={(v) => set(["locationsPage", "subhero", "textBackgroundOpacity"], v)}
+              hint="0%はパネル非表示。文字の後ろに帯を敷いて可読性を上げたい場合に上げてください"
             />
             <h3 className="admin-subhead">CTAバンド</h3>
             <Field label="ラベル" value={data.locationsPage.cta.eyebrow} onChange={(v) => set(["locationsPage", "cta", "eyebrow"], v)} />
