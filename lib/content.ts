@@ -93,6 +93,9 @@ interface SectionHeadCopy {
   eyebrow: string;
   heading: string;
   lead?: string;
+  /** 0–1 darkening over a photo, for sections where copy overlays the Scene
+   * image (hero/subhero). Ignored elsewhere. */
+  overlayOpacity?: number;
 }
 
 export interface SiteData {
@@ -109,6 +112,8 @@ export interface SiteData {
       secondaryCta: string;
       metaLine1: string;
       metaLine2: string;
+      /** 0–1 darkening over the hero photo, for text legibility. */
+      overlayOpacity?: number;
     };
     concept: { eyebrow: string; heading: string; paragraph1: string; paragraph2: string };
     locationsSection: SectionHeadCopy;

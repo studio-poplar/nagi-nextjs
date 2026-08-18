@@ -110,6 +110,10 @@ export interface SceneProps {
    * file exists it replaces the illustrated SVG scene entirely; until then this
    * prop is a no-op and the illustration keeps rendering. */
   photo?: string;
+  /** 0–1 darkening applied over the photo, for text legibility when copy is
+   * overlaid on top (hero / subhero). Ignored in illustration mode, where the
+   * hand-tuned vignette already handles contrast. Defaults to 0.35. */
+  photoOverlay?: number;
 }
 
 export default function Scene({
@@ -121,6 +125,7 @@ export default function Scene({
   sunPosition,
   className = "",
   photo,
+  photoOverlay,
 }: SceneProps) {
   const waves = WAVES[mood];
   const heights = WAVE_HEIGHTS[mood];
@@ -139,6 +144,7 @@ export default function Scene({
           sizes="(max-width: 768px) 100vw, 50vw"
           style={{ objectFit: "cover" }}
         />
+        <div className="photo-overlay" style={{ opacity: photoOverlay ?? 0.35 }} />
         <div className="grain" />
         <div className="vignette" />
       </div>

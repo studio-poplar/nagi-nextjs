@@ -19,7 +19,8 @@
       "primaryCta": "入会案内を見る",
       "secondaryCta": "四つの拠点を見る",
       "metaLine1": "四拠点 / UCHIBO・NOTO・AWAJI・GOTO",
-      "metaLine2": "本日の凪 — 内房 波高 0.3m"
+      "metaLine2": "本日の凪 — 内房 波高 0.3m",
+      "overlayOpacity": 0.35
     },
     "concept": {
       "eyebrow": "THE CONCEPT",
@@ -65,7 +66,8 @@
     "subhero": {
       "eyebrow": "OUR BASES",
       "heading": "四つの海、\n四つの拠点。",
-      "lead": "東京湾・日本海・瀬戸内海・東シナ海。舟屋を継承した一棟に薪サウナとデッキテラスを備え、会員はどの拠点も月額プランの範囲内で自由に選んで滞在できます。"
+      "lead": "東京湾・日本海・瀬戸内海・東シナ海。舟屋を継承した一棟に薪サウナとデッキテラスを備え、会員はどの拠点も月額プランの範囲内で自由に選んで滞在できます。",
+      "overlayOpacity": 0.35
     },
     "cta": {
       "eyebrow": "JOIN NAGI",

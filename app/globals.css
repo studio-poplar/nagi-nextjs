@@ -408,6 +408,16 @@ h2.section-title {
   opacity: 0.5;
   pointer-events: none;
 }
+/* Flat, adjustable darkening layer for photo mode — opacity is set inline
+   per-instance (Scene's photoOverlay prop, editable in /admin) so text
+   overlaid on a real photo (hero/subhero) stays legible regardless of how
+   bright the source image is. */
+.scene .photo-overlay {
+  position: absolute;
+  inset: 0;
+  background: var(--ink);
+  pointer-events: none;
+}
 .scene .vignette {
   position: absolute;
   inset: 0;
