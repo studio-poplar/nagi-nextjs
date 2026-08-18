@@ -1,23 +1,24 @@
 import type { Metadata } from "next";
 import Button from "@/components/Button";
+import Lines from "@/components/Lines";
 import PlanCard from "@/components/PlanCard";
-import { plans, compareRows, faqs } from "@/lib/content";
+import { getSiteData } from "@/lib/content";
 
-export const metadata: Metadata = {
-  title: "料金・プラン",
-  description: "凪の月額プラン紹介。凪プラン・潮プラン・航プランの3種類から、暮らしのペースに合わせて選べます。",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const { pricingPage } = getSiteData();
+  return { title: pricingPage.metaTitle, description: pricingPage.metaDescription };
+}
 
 export default function PricingPage() {
+  const { pricingPage, plans, compareRows, faqs } = getSiteData();
+
   return (
     <>
       <section className="page-intro">
         <div className="wrap">
-          <span className="eyebrow">MEMBERSHIP</span>
-          <h1>料金・プラン</h1>
-          <p className="lead">
-            すべてのプランに、清掃費・光熱費・寝具一式・薪サウナの利用が含まれます。入会金は一律 ¥33,000（初月のみ）。休会・解約は翌月から可能です。
-          </p>
+          <span className="eyebrow">{pricingPage.intro.eyebrow}</span>
+          <h1>{pricingPage.intro.heading}</h1>
+          <p className="lead">{pricingPage.intro.lead}</p>
         </div>
       </section>
 
@@ -34,7 +35,7 @@ export default function PricingPage() {
       <section style={{ paddingTop: 0 }}>
         <div className="wrap">
           <span className="eyebrow">COMPARE</span>
-          <h2 className="section-title">プランをくらべる</h2>
+          <h2 className="section-title">{pricingPage.compareHeading}</h2>
           <div className="compare-table-wrap" data-reveal>
             <table className="compare-table">
               <thead>
@@ -67,7 +68,7 @@ export default function PricingPage() {
       <section style={{ background: "var(--sand-deep)" }}>
         <div className="wrap" style={{ maxWidth: 840 }}>
           <span className="eyebrow">FAQ</span>
-          <h2 className="section-title">よくある質問</h2>
+          <h2 className="section-title">{pricingPage.faqHeading}</h2>
           <div style={{ marginTop: 36 }} data-reveal>
             {faqs.map((faq) => (
               <details className="faq" key={faq.question} open={faq.open}>
@@ -82,17 +83,15 @@ export default function PricingPage() {
       <section className="cta-band">
         <div className="wrap">
           <span className="eyebrow" style={{ color: "var(--sea-pale)" }}>
-            JOIN NAGI
+            {pricingPage.cta.eyebrow}
           </span>
           <h2>
-            プランは、
-            <br />
-            あとから変更できます。
+            <Lines text={pricingPage.cta.heading} />
           </h2>
-          <p className="lead">まずは凪プランから始めて、暮らしのペースが掴めたら潮プラン・航プランへ。面談で無理のない選び方をご提案します。</p>
+          <p className="lead">{pricingPage.cta.lead}</p>
           <div className="hero-actions">
             <Button href="/apply" variant="on-sand" arrow>
-              入会案内を見る
+              {pricingPage.cta.primaryCta}
             </Button>
           </div>
         </div>

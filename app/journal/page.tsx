@@ -1,21 +1,24 @@
 import type { Metadata } from "next";
 import Button from "@/components/Button";
+import Lines from "@/components/Lines";
 import JournalCard from "@/components/JournalCard";
-import { journalEntries } from "@/lib/content";
+import { getSiteData } from "@/lib/content";
 
-export const metadata: Metadata = {
-  title: "航海日誌",
-  description: "凪の四拠点の宿主や会員が綴る、舟屋の改修と静けさの記録。",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const { journalPage } = getSiteData();
+  return { title: journalPage.metaTitle, description: journalPage.metaDescription };
+}
 
 export default function JournalPage() {
+  const { journalPage, journalEntries } = getSiteData();
+
   return (
     <>
       <section className="page-intro">
         <div className="wrap">
-          <span className="eyebrow">JOURNAL</span>
-          <h1>航海日誌</h1>
-          <p className="lead">四拠点の宿主や会員が綴る、舟屋の改修と静けさの記録。潮の匂いのする日々の断片です。</p>
+          <span className="eyebrow">{journalPage.intro.eyebrow}</span>
+          <h1>{journalPage.intro.heading}</h1>
+          <p className="lead">{journalPage.intro.lead}</p>
         </div>
       </section>
 
@@ -32,17 +35,15 @@ export default function JournalPage() {
       <section className="cta-band">
         <div className="wrap">
           <span className="eyebrow" style={{ color: "var(--sea-pale)" }}>
-            JOIN NAGI
+            {journalPage.cta.eyebrow}
           </span>
           <h2>
-            次の日誌を、
-            <br />
-            自分の手で書く。
+            <Lines text={journalPage.cta.heading} />
           </h2>
-          <p className="lead">入会すると、滞在の記録を会員限定の日誌に残せます。</p>
+          <p className="lead">{journalPage.cta.lead}</p>
           <div className="hero-actions">
             <Button href="/apply" variant="on-sand" arrow>
-              入会案内を見る
+              {journalPage.cta.primaryCta}
             </Button>
           </div>
         </div>

@@ -1,6 +1,6 @@
-import { tideData } from "@/lib/content";
+import type { TideDatum } from "@/lib/content";
 
-export default function TideTicker() {
+export default function TideTicker({ tideData }: { tideData: TideDatum[] }) {
   const items = [...tideData, ...tideData];
 
   return (

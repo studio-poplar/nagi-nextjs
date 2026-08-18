@@ -1,7 +1,9 @@
 import Link from "next/link";
-import { navLinks } from "@/lib/content";
+import { getSiteData } from "@/lib/content";
 
 export default function Footer() {
+  const { navLinks, footer } = getSiteData();
+
   return (
     <footer className="site-footer">
       <div className="wrap footer-top">
@@ -9,7 +11,7 @@ export default function Footer() {
           <Link href="/" className="logo">
             凪<small>NAGI</small>
           </Link>
-          <p>定額で、日本の渚をめぐる暮らしを。全国の海辺に佇む舟屋一棟一棟を、セカンドホームとして開いています。</p>
+          <p>{footer.tagline}</p>
         </div>
         <div className="footer-col">
           <h5>SITE</h5>
@@ -51,8 +53,8 @@ export default function Footer() {
         </div>
       </div>
       <div className="wrap footer-bottom">
-        <span>© 2026 凪株式会社 NAGI Inc.</span>
-        <span>本サイトはWeb制作ポートフォリオのための架空案件です。</span>
+        <span>{footer.copyright}</span>
+        <span>{footer.disclaimer}</span>
       </div>
     </footer>
   );

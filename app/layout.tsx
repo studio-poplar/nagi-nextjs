@@ -3,17 +3,22 @@ import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ScrollReveal from "@/components/ScrollReveal";
+import { getSiteData } from "@/lib/content";
 
-export const metadata: Metadata = {
-  title: {
-    default: "凪 NAGI ｜ 海のセカンドホーム",
-    template: "%s ｜ 凪 NAGI",
-  },
-  description:
-    "凪(NAGI)は、全国の海辺に佇む舟屋を月額会費で暮らすように巡る、会員制のセカンドホームです。内房・能登・淡路・五島、四つの拠点に薪サウナとデッキテラスを備えて。",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const { site } = getSiteData();
+  return {
+    title: {
+      default: site.titleDefault,
+      template: site.titleTemplate,
+    },
+    description: site.description,
+  };
+}
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  const { navLinks, tideData } = getSiteData();
+
   return (
     <html lang="ja">
       <head>
@@ -34,7 +39,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body>
-        <Header />
+        <Header navLinks={navLinks} tideData={tideData} />
         <main>{children}</main>
         <Footer />
         <ScrollReveal />

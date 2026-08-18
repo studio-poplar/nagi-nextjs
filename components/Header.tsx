@@ -3,16 +3,21 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import { navLinks } from "@/lib/content";
+import type { NavLink, TideDatum } from "@/lib/content";
 import TideTicker from "./TideTicker";
 
-export default function Header() {
+interface HeaderProps {
+  navLinks: NavLink[];
+  tideData: TideDatum[];
+}
+
+export default function Header({ navLinks, tideData }: HeaderProps) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
 
   return (
     <header className="site-header">
-      <TideTicker />
+      <TideTicker tideData={tideData} />
       <nav className="nav wrap">
         <Link href="/" className="logo" onClick={() => setOpen(false)}>
           凪<small>NAGI</small>

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
-import { plans } from "@/lib/content";
+import type { Plan } from "@/lib/content";
 
 const locationChecks: { value: string; label: string }[] = [
   { value: "uchibo", label: "内房" },
@@ -10,7 +10,7 @@ const locationChecks: { value: string; label: string }[] = [
   { value: "goto", label: "五島" },
 ];
 
-export default function ApplyForm() {
+export default function ApplyForm({ plans }: { plans: Plan[] }) {
   const [submitted, setSubmitted] = useState(false);
 
   function handleSubmit(e: FormEvent<HTMLFormElement>) {

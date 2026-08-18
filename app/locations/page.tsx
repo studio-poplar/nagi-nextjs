@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 import Scene from "@/components/Scene";
 import Button from "@/components/Button";
-import { locations } from "@/lib/content";
+import Lines from "@/components/Lines";
+import { getSiteData } from "@/lib/content";
 
-export const metadata: Metadata = {
-  title: "拠点",
-  description: "凪の四拠点、内房・能登・淡路・五島の紹介。舟屋を継承した建築と薪サウナ、アクセスや設備、おすすめの季節をご案内します。",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const { locationsPage } = getSiteData();
+  return { title: locationsPage.metaTitle, description: locationsPage.metaDescription };
+}
 
 const details: { key: "access" | "capacity" | "facilities" | "season"; label: string }[] = [
   { key: "access", label: "ACCESS" },
@@ -16,6 +17,8 @@ const details: { key: "access" | "capacity" | "facilities" | "season"; label: st
 ];
 
 export default function LocationsPage() {
+  const { locationsPage, locations } = getSiteData();
+
   return (
     <>
       <div className="subhero">
@@ -26,13 +29,11 @@ export default function LocationsPage() {
           photo="/images/locations-subhero.jpg"
         />
         <div className="subhero-inner wrap">
-          <span className="eyebrow">OUR BASES</span>
+          <span className="eyebrow">{locationsPage.subhero.eyebrow}</span>
           <h1>
-            四つの海、
-            <br />
-            四つの拠点。
+            <Lines text={locationsPage.subhero.heading} />
           </h1>
-          <p>東京湾・日本海・瀬戸内海・東シナ海。舟屋を継承した一棟に薪サウナとデッキテラスを備え、会員はどの拠点も月額プランの範囲内で自由に選んで滞在できます。</p>
+          <p>{locationsPage.subhero.lead}</p>
         </div>
       </div>
 
@@ -83,20 +84,18 @@ export default function LocationsPage() {
       <section className="cta-band">
         <div className="wrap">
           <span className="eyebrow" style={{ color: "var(--sea-pale)" }}>
-            JOIN NAGI
+            {locationsPage.cta.eyebrow}
           </span>
           <h2>
-            四つの拠点、
-            <br />
-            どこから始めますか。
+            <Lines text={locationsPage.cta.heading} />
           </h2>
-          <p className="lead">プランごとの利用可能日数や、拠点間の移動のコツは入会面談でご案内します。</p>
+          <p className="lead">{locationsPage.cta.lead}</p>
           <div className="hero-actions">
             <Button href="/pricing" variant="on-sand" arrow>
-              料金・プランを見る
+              {locationsPage.cta.primaryCta}
             </Button>
             <Button href="/apply" variant="on-dark">
-              入会案内を見る
+              {locationsPage.cta.secondaryCta}
             </Button>
           </div>
         </div>

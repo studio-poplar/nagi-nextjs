@@ -1,27 +1,29 @@
 import type { Metadata } from "next";
 import ApplyForm from "@/components/ApplyForm";
-import { applySteps } from "@/lib/content";
+import { getSiteData } from "@/lib/content";
 
-export const metadata: Metadata = {
-  title: "入会案内",
-  description: "凪への入会の流れと、お申し込みフォーム。",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const { applyPage } = getSiteData();
+  return { title: applyPage.metaTitle, description: applyPage.metaDescription };
+}
 
 export default function ApplyPage() {
+  const { applyPage, applySteps, plans } = getSiteData();
+
   return (
     <>
       <section className="page-intro">
         <div className="wrap">
-          <span className="eyebrow">JOIN NAGI</span>
-          <h1>入会案内</h1>
-          <p className="lead">入会には簡単なオンライン面談があります。プランや拠点の選び方は、面談でゆっくりご相談いただけます。</p>
+          <span className="eyebrow">{applyPage.intro.eyebrow}</span>
+          <h1>{applyPage.intro.heading}</h1>
+          <p className="lead">{applyPage.intro.lead}</p>
         </div>
       </section>
 
       <section>
         <div className="wrap">
-          <span className="eyebrow">HOW IT WORKS</span>
-          <h2 className="section-title">入会までの、4つのステップ。</h2>
+          <span className="eyebrow">{applyPage.stepsSection.eyebrow}</span>
+          <h2 className="section-title">{applyPage.stepsSection.heading}</h2>
           <div className="steps" style={{ marginTop: 32 }} data-reveal>
             {applySteps.map((step) => (
               <div className="step-row" key={step.number}>
@@ -40,13 +42,13 @@ export default function ApplyPage() {
 
       <section style={{ background: "var(--sand-deep)" }}>
         <div className="wrap">
-          <span className="eyebrow">APPLICATION</span>
-          <h2 className="section-title">お申し込みフォーム</h2>
+          <span className="eyebrow">{applyPage.formSection.eyebrow}</span>
+          <h2 className="section-title">{applyPage.formSection.heading}</h2>
           <p className="lead" style={{ marginTop: 16 }}>
-            まずは面談のご予約から。折り返しのご連絡までに3営業日ほどいただいております。
+            {applyPage.formSection.lead}
           </p>
           <div data-reveal>
-            <ApplyForm />
+            <ApplyForm plans={plans} />
           </div>
         </div>
       </section>
