@@ -25,7 +25,6 @@ export default function HomePage() {
         <Scene
           mood="dawn"
           fill
-          showBoat
           sunPosition={{ top: "5%", left: "63%", size: 230 }}
           photo="/images/hero-uchibo-dawn.jpg"
           photoOverlay={home.hero.overlayOpacity}

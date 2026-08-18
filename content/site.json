@@ -2,6 +2,12 @@
   "imageSettings": {
     "hero-uchibo-dawn.jpg": {
       "brightness": 1
+    },
+    "concept-life.jpg": {
+      "brightness": 1.1
+    },
+    "locations-subhero.jpg": {
+      "brightness": 0.9
     }
   },
   "site": {
@@ -164,7 +170,6 @@
       ],
       "mood": "dawn",
       "landmark": "pier",
-      "showBoat": true,
       "sunPosition": {
         "top": "10%",
         "left": "66%",

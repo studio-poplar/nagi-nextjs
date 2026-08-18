@@ -55,7 +55,6 @@ export default function LocationsPage() {
                 <Scene
                   mood={location.mood}
                   landmark={location.landmark}
-                  showBoat={location.showBoat}
                   sunPosition={location.sunPosition}
                   aspect="4 / 5"
                   className="concept-figure"

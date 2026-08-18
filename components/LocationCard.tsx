@@ -9,7 +9,6 @@ export default function LocationCard({ location }: { location: Location }) {
       <Scene
         mood={location.mood}
         landmark={location.landmark}
-        showBoat={location.showBoat}
         sunPosition={location.sunPosition}
         aspect="4 / 3"
         photo={photo}

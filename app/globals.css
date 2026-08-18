@@ -395,11 +395,6 @@ h2.section-title {
 .scene .layer.fore {
   animation: pan-fast 17s linear infinite alternate;
 }
-.scene .boat {
-  position: absolute;
-  animation: bob 6.5s ease-in-out infinite;
-  transform-origin: 50% 100%;
-}
 .scene .grain {
   position: absolute;
   inset: 0;
@@ -535,15 +530,6 @@ h2.section-title {
   }
   to {
     transform: translateX(-6.5%) scale(1.12);
-  }
-}
-@keyframes bob {
-  0%,
-  100% {
-    transform: translateY(0) rotate(-1.2deg);
-  }
-  50% {
-    transform: translateY(-5px) rotate(1.2deg);
   }
 }
 @keyframes drift-sun {

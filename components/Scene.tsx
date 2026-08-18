@@ -99,7 +99,6 @@ function Landmark({ type }: { type: SceneLandmark }) {
 export interface SceneProps {
   mood?: SceneMood;
   landmark?: SceneLandmark;
-  showBoat?: boolean;
   /** fills the parent (position:absolute inset:0) — for hero / subhero bands */
   fill?: boolean;
   /** css aspect-ratio, ignored when fill is true */
@@ -122,7 +121,6 @@ export interface SceneProps {
 export default function Scene({
   mood = "dawn",
   landmark = "none",
-  showBoat = false,
   fill = false,
   aspect,
   sunPosition,
@@ -174,13 +172,6 @@ export default function Scene({
       >
         <path d={waves.back} />
       </svg>
-      {showBoat && (
-        <svg className="boat" viewBox="0 0 100 60" style={{ left: "20%", bottom: "24%", width: "12%" }}>
-          <path d="M8,42 L92,42 L78,54 L22,54 Z" fill="var(--paper)" />
-          <line x1="50" y1="42" x2="50" y2="12" stroke="var(--paper)" strokeWidth="2" />
-          <path d="M50,14 L74,36 L50,36 Z" fill="var(--paper)" />
-        </svg>
-      )}
       <svg
         className="layer mid"
         viewBox="0 0 1440 420"
