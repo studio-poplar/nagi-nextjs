@@ -28,6 +28,7 @@ export default function HomePage() {
           showBoat
           sunPosition={{ top: "5%", left: "63%", size: 230 }}
           photo="/images/hero-uchibo-dawn.jpg"
+          photoOverlay={home.hero.overlayOpacity}
         />
         <div className="hero-inner wrap">
           <p className="hero-kicker">{home.hero.kicker}</p>
