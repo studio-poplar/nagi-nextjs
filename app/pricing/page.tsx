@@ -16,7 +16,7 @@ export default function PricingPage() {
           <span className="eyebrow">MEMBERSHIP</span>
           <h1>料金・プラン</h1>
           <p className="lead">
-            すべてのプランに、清掃費・光熱費・寝具一式が含まれます。入会金は一律 ¥22,000（初月のみ）。休会・解約は翌月から可能です。
+            すべてのプランに、清掃費・光熱費・寝具一式・薪サウナの利用が含まれます。入会金は一律 ¥33,000（初月のみ）。休会・解約は翌月から可能です。
           </p>
         </div>
       </section>

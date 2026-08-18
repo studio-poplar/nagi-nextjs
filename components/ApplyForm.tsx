@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
+import { plans } from "@/lib/content";
 
 const locationChecks: { value: string; label: string }[] = [
   { value: "uchibo", label: "内房" },
@@ -30,9 +31,11 @@ export default function ApplyForm() {
       <div className="field">
         <label htmlFor="plan">ご希望のプラン</label>
         <select id="plan" name="plan">
-          <option>凪プラン（月1泊から・¥38,000/月）</option>
-          <option>潮プラン（月2泊から・¥68,000/月）</option>
-          <option>航プラン（月4泊から・¥128,000/月）</option>
+          {plans.map((plan) => (
+            <option key={plan.id}>
+              {plan.name}（{plan.kana.split(" ／ ")[1]}・{plan.price}/月）
+            </option>
+          ))}
           <option>まだ決めていない・相談したい</option>
         </select>
       </div>

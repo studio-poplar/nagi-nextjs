@@ -5,7 +5,7 @@ import { locations } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "拠点",
-  description: "凪の四拠点、内房・能登・淡路・五島の紹介。アクセスや設備、おすすめの季節をご案内します。",
+  description: "凪の四拠点、内房・能登・淡路・五島の紹介。舟屋を継承した建築と薪サウナ、アクセスや設備、おすすめの季節をご案内します。",
 };
 
 const details: { key: "access" | "capacity" | "facilities" | "season"; label: string }[] = [
@@ -27,7 +27,7 @@ export default function LocationsPage() {
             <br />
             四つの拠点。
           </h1>
-          <p>東京湾・日本海・瀬戸内海・東シナ海。会員はどの拠点も、月額プランの範囲内で自由に選んで宿泊できます。</p>
+          <p>東京湾・日本海・瀬戸内海・東シナ海。舟屋を継承した一棟に薪サウナとデッキテラスを備え、会員はどの拠点も月額プランの範囲内で自由に選んで滞在できます。</p>
         </div>
       </div>
 

@@ -6,11 +6,11 @@ import ScrollReveal from "@/components/ScrollReveal";
 
 export const metadata: Metadata = {
   title: {
-    default: "凪 NAGI ｜ サブスクリプション民宿",
+    default: "凪 NAGI ｜ 海のセカンドホーム",
     template: "%s ｜ 凪 NAGI",
   },
   description:
-    "凪(NAGI)は、全国の漁村に建つ宿を月額会費で泊まり歩ける会員制の住まいです。内房・能登・淡路・五島、四つの海を拠点に。",
+    "凪(NAGI)は、全国の海辺に佇む舟屋を月額会費で暮らすように巡る、会員制のセカンドホームです。内房・能登・淡路・五島、四つの拠点に薪サウナとデッキテラスを備えて。",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

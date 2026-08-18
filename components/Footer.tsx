@@ -9,7 +9,7 @@ export default function Footer() {
           <Link href="/" className="logo">
             凪<small>NAGI</small>
           </Link>
-          <p>定額で、日本の渚をめぐる暮らしを。全国の漁村に佇む一棟一棟を、住まいとして開いています。</p>
+          <p>定額で、日本の渚をめぐる暮らしを。全国の海辺に佇む舟屋一棟一棟を、セカンドホームとして開いています。</p>
         </div>
         <div className="footer-col">
           <h5>SITE</h5>

@@ -5,7 +5,7 @@ import { journalEntries } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "航海日誌",
-  description: "凪の四拠点の宿主や会員が綴る、季節と手仕事の記録。",
+  description: "凪の四拠点の宿主や会員が綴る、舟屋の改修と静けさの記録。",
 };
 
 export default function JournalPage() {
@@ -15,7 +15,7 @@ export default function JournalPage() {
         <div className="wrap">
           <span className="eyebrow">JOURNAL</span>
           <h1>航海日誌</h1>
-          <p className="lead">四拠点の宿主や会員が綴る、季節と手仕事の記録。潮の匂いのする日々の断片です。</p>
+          <p className="lead">四拠点の宿主や会員が綴る、舟屋の改修と静けさの記録。潮の匂いのする日々の断片です。</p>
         </div>
       </section>
 

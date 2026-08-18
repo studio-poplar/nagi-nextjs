@@ -10,9 +10,9 @@ import JournalCard from "@/components/JournalCard";
 import { locations, plans, daySteps, voices, journalEntries } from "@/lib/content";
 
 export const metadata: Metadata = {
-  title: "凪 NAGI ｜ サブスクリプション民宿",
+  title: "凪 NAGI ｜ 海のセカンドホーム",
   description:
-    "凪(NAGI)は、全国の漁村に建つ宿を月額会費で泊まり歩ける会員制の住まいです。内房・能登・淡路・五島、四つの海を拠点に。",
+    "凪(NAGI)は、全国の海辺に佇む舟屋を月額会費で暮らすように巡る、会員制のセカンドホームです。内房・能登・淡路・五島、四つの拠点に薪サウナとデッキテラスを備えて。",
 };
 
 export default function HomePage() {
@@ -22,10 +22,10 @@ export default function HomePage() {
       <div className="hero">
         <Scene mood="dawn" fill showBoat sunPosition={{ top: "5%", left: "63%", size: 230 }} />
         <div className="hero-inner wrap">
-          <p className="hero-kicker">SUBSCRIPTION MINSHUKU — 定額制、会員制の宿</p>
+          <p className="hero-kicker">SUBSCRIPTION SECOND HOME — 定額制、会員制の海辺の家</p>
           <h1>凪</h1>
           <p className="hero-copy">
-            月々の会費で、全国の漁村に佇む宿を泊まり歩く。忙しさの合間に、潮の凪ぐ時間を暮らしへ差し込む、新しい第二の住まいです。
+            都市の喧騒から、舟屋づくりの静けさへ。月々の会費で、全国の海辺に佇む一棟を巡る。何もしないという、贅沢な時間のための第二の住まいです。
           </p>
           <div className="hero-actions">
             <Button href="/apply" variant="primary" arrow>
@@ -48,15 +48,15 @@ export default function HomePage() {
           <div data-reveal>
             <span className="eyebrow">THE CONCEPT</span>
             <h2 className="section-title">
-              住むところを、
+              何もしないことを、
               <br />
-              ひとつに決めない。
+              暮らしにする。
             </h2>
             <p className="lead">
-              凪(なぎ)は、全国の漁村に建つ宿を、月額の会費で泊まり歩ける会員制の住まいです。空き家や納屋を改修した一棟一棟に、寝具や台所道具、薪と七輪までを備え、着いたその日から暮らせるようにしています。
+              凪(なぎ)は、全国の海辺に佇む舟屋を、月額の会費で暮らすように巡れる会員制のセカンドホームです。歴史ある梁や古材の質感を残しながら、薪サウナとデッキテラス、専用の桟橋までを備え、着いたその日から何もせずに過ごせるようにしています。
             </p>
             <p className="lead">
-              決まった一つの家に縛られず、潮の満ち引きや漁のカレンダーに合わせて拠点を移す。平日は都市で働き、週末は内房で干物を炙り、月に一度は能登の朝市に並ぶ。ふたつ以上の土地を行き来する暮らし方を、後押しします。
+              決まった一つの家に縛られず、潮の満ち引きに合わせて拠点を移す。平日は都市で働き、週末は内房のデッキでサウナに入り、月に一度は能登の海鳴りを聞く。静けさと余白を、暮らしの一部にする過ごし方を後押しします。
             </p>
           </div>
           <div data-reveal>
@@ -82,7 +82,7 @@ export default function HomePage() {
               </h2>
             </div>
             <p className="lead" style={{ color: "var(--sea-pale)" }}>
-              東京湾の穏やかな内海から、日本海の荒々しい岩礁、瀬戸内の凪、そして東シナ海の透明な海まで。会員は月額プランの範囲内で、どの拠点も自由に選んで宿泊できます。
+              東京湾の穏やかな内海から、日本海の荒々しい岩礁、瀬戸内の凪、そして東シナ海の透明な海まで。どの拠点も、舟屋を継承した一棟に薪サウナとデッキテラスを備え、会員は月額プランの範囲内で自由に選んで滞在できます。
             </p>
           </div>
 
@@ -107,7 +107,7 @@ export default function HomePage() {
               </h2>
             </div>
             <p className="lead">
-              どのプランも、清掃費・光熱費込みで四拠点すべてを利用可能。まずは月1泊のペースから、拠点を巡りながら働くペースまで。
+              どのプランも、清掃費・光熱費・薪サウナの利用込みで四拠点すべてを利用可能。まずは月1泊のペースから、拠点を巡りながら働くペースまで。
             </p>
           </div>
 
@@ -181,7 +181,7 @@ export default function HomePage() {
           <h2>
             まずは一拠点から、
             <br />
-            海のある暮らしを。
+            何もしない暮らしを。
           </h2>
           <p className="lead">入会には簡単なオンライン面談があります。空き状況や拠点の選び方は、面談でゆっくりご相談ください。</p>
           <div className="hero-actions">
