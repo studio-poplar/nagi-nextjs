@@ -20,7 +20,13 @@ export default function HomePage() {
     <>
       {/* ============ HERO ============ */}
       <div className="hero">
-        <Scene mood="dawn" fill showBoat sunPosition={{ top: "5%", left: "63%", size: 230 }} />
+        <Scene
+          mood="dawn"
+          fill
+          showBoat
+          sunPosition={{ top: "5%", left: "63%", size: 230 }}
+          photo="/images/hero-uchibo-dawn.jpg"
+        />
         <div className="hero-inner wrap">
           <p className="hero-kicker">SUBSCRIPTION SECOND HOME — 定額制、会員制の海辺の家</p>
           <h1>凪</h1>
@@ -60,7 +66,13 @@ export default function HomePage() {
             </p>
           </div>
           <div data-reveal>
-            <Scene mood="dawn" aspect="4 / 5" sunPosition={{ top: "10%", left: "60%", size: 120 }} className="concept-figure" />
+            <Scene
+              mood="dawn"
+              aspect="4 / 5"
+              sunPosition={{ top: "10%", left: "60%", size: 120 }}
+              className="concept-figure"
+              photo="/images/concept-life.jpg"
+            />
           </div>
         </div>
       </section>

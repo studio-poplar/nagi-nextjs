@@ -11,6 +11,7 @@ export default function LocationCard({ location }: { location: Location }) {
         showBoat={location.showBoat}
         sunPosition={location.sunPosition}
         aspect="4 / 3"
+        photo={`/images/location-${location.id}.jpg`}
       />
       <div className="loc-card-body">
         <span className="region">{location.region}</span>

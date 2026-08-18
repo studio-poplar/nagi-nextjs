@@ -19,7 +19,12 @@ export default function LocationsPage() {
   return (
     <>
       <div className="subhero">
-        <Scene mood="dawn" fill sunPosition={{ top: "8%", left: "70%", size: 180 }} />
+        <Scene
+          mood="dawn"
+          fill
+          sunPosition={{ top: "8%", left: "70%", size: 180 }}
+          photo="/images/locations-subhero.jpg"
+        />
         <div className="subhero-inner wrap">
           <span className="eyebrow">OUR BASES</span>
           <h1>
@@ -51,6 +56,7 @@ export default function LocationsPage() {
                   sunPosition={location.sunPosition}
                   aspect="4 / 5"
                   className="concept-figure"
+                  photo={`/images/location-${location.id}.jpg`}
                 />
               </div>
               <div data-reveal style={flipped ? { order: 1 } : undefined}>

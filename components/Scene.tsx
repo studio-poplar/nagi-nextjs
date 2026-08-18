@@ -1,3 +1,6 @@
+import Image from "next/image";
+import { publicImageExists } from "@/lib/images";
+
 export type SceneMood = "dawn" | "dusk" | "overcast" | "noon";
 export type SceneLandmark = "pier" | "bridge" | "church" | "none";
 
@@ -103,6 +106,10 @@ export interface SceneProps {
   aspect?: string;
   sunPosition?: { top: string; left: string; size: number };
   className?: string;
+  /** public/ path to a real photo (e.g. "/images/hero-uchibo-dawn.jpg"). When the
+   * file exists it replaces the illustrated SVG scene entirely; until then this
+   * prop is a no-op and the illustration keeps rendering. */
+  photo?: string;
 }
 
 export default function Scene({
@@ -113,18 +120,33 @@ export default function Scene({
   aspect,
   sunPosition,
   className = "",
+  photo,
 }: SceneProps) {
   const waves = WAVES[mood];
   const heights = WAVE_HEIGHTS[mood];
   const sun = sunPosition ?? SUN_DEFAULT[mood];
   const moodClass = mood === "dawn" ? "" : ` scene--${mood}`;
+  const wrapperClassName = `scene${moodClass}${className ? ` ${className}` : ""}`;
+  const wrapperStyle = fill ? undefined : { aspectRatio: aspect ?? "4 / 3" };
+
+  if (photo && publicImageExists(photo)) {
+    return (
+      <div className={wrapperClassName} style={wrapperStyle} aria-hidden="true">
+        <Image
+          src={photo}
+          alt=""
+          fill
+          sizes="(max-width: 768px) 100vw, 50vw"
+          style={{ objectFit: "cover" }}
+        />
+        <div className="grain" />
+        <div className="vignette" />
+      </div>
+    );
+  }
 
   return (
-    <div
-      className={`scene${moodClass}${className ? ` ${className}` : ""}`}
-      style={fill ? undefined : { aspectRatio: aspect ?? "4 / 3" }}
-      aria-hidden="true"
-    >
+    <div className={wrapperClassName} style={wrapperStyle} aria-hidden="true">
       <div className="sky" />
       <div
         className="sun"
