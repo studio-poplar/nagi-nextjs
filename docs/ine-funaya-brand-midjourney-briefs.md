@@ -2,6 +2,12 @@
 
 参考：SANU 2nd Home（山ではなく「海」）。京都府伊根町の舟屋をリノベーションした、定員6名・海に面したデッキテラス・ボート係留可能な一棟貸しセカンドホーム。ターゲットは30〜50代の都市部経営者・高所得層。「予約したくなる画像」ではなく「この場所で暮らしてみたい」と思わせるブランド体験の構築が目的。
 
+## 使い方
+
+- 各シーンのコードブロックは、共通ベース＋固有の描写＋アスペクト比＋共通ネガティブまで**すべて合体済み**です。そのまま丸ごとコピーして、MidjourneyのWeb版（画面上部の「What will you imagine?」欄）またはDiscordの `/imagine` に貼り付けるだけで使えます。分割・組み合わせ作業は不要です。
+- **進める順番の目安**：①ヒーロービジュアル → ②海側外観 のどちらかを最初に数パターン生成し、トーン（色味・粒状感・明るさ）が気に入るものを1枚選ぶ。以降のシーンでそのSeed値（画像を開いて「...」→ Copy Seed）を他のプロンプト末尾に `--seed 12345` として追加すると、全シーンのトーンが揃いやすくなります。
+- 生成後、気に入った1枚を右クリック→Vary(Subtle)やUpscaleで仕上げてください。
+
 ---
 
 ## 1. ブランド世界観定義
@@ -53,22 +59,17 @@
 
 ---
 
-## 2. Midjourney 共通ベースプロンプト
+## 2. Midjourney 共通ベース（参考・編集不要）
 
-全プロンプトの土台として使用してください（各シーンのプロンプトは、このベースに固有の要素を足したものです）。
+以下は全プロンプトに織り込み済みです。トーンを調整したくなった時のために掲載していますが、通常は下記3〜4章のブロックをそのままコピペしてください。
 
-```
-Editorial architectural photography of a renovated traditional Japanese funaya boathouse residence in Ine, Kyoto, built directly above calm coastal water, weathered charcoal-black yakisugi charred cedar exterior siding, aged timber beams and posts with visible grain, minimalist Japanese interior with Scandinavian warmth, abundant negative space, quiet contemplative mood, soft natural light, muted sand and slate-grey color palette with near-black wood accents, medium format film photography, subtle film grain, low contrast, no oversaturation, luxury travel magazine editorial style, serene and understated, --v 6.1 --style raw
-```
+**ベース**：Editorial architectural photography of a renovated traditional Japanese funaya boathouse residence in Ine, Kyoto, built directly above calm coastal water, weathered charcoal-black yakisugi charred cedar exterior siding, aged timber beams and posts with visible grain, minimalist Japanese interior with Scandinavian warmth, abundant negative space, quiet contemplative mood, soft natural light, muted sand and slate-grey color palette with near-black wood accents, medium format film photography, subtle film grain, low contrast, no oversaturation, luxury travel magazine editorial style, serene and understated
 
-**共通ネガティブ**（全シーン末尾に付与）：
-```
---no tropical resort, Bali style, Hawaiian style, Dubai style, glass modern villa, flashy luxury hotel, over-styled staging, futuristic AI architecture, neon colors, oversaturated colors, visible logos, text, watermark, posed model, visible faces looking at camera
-```
+**共通ネガティブ**：tropical resort, Bali style, Hawaiian style, Dubai style, glass modern villa, flashy luxury hotel, over-styled staging, futuristic AI architecture, neon colors, oversaturated colors, visible logos, text, watermark, posed model, visible faces looking at camera
 
 ---
 
-## 3〜4. シーン別 Midjourney 最終出力
+## 3〜4. シーン別 Midjourney 最終出力（コピペ用・完成形）
 
 ### TOPページ
 
@@ -77,8 +78,9 @@ Editorial architectural photography of a renovated traditional Japanese funaya b
 - **狙い**：サイト着地の1秒で「静けさ」を伝える。ブランドの世界観そのもの。
 - **構図**：水面すれすれの低い視点。舟屋が画面下1/3、上2/3は空と海の余白。
 - **推奨アスペクト比**：21:9
+
 ```
-[共通ベース] + a low-angle view at water level facing a solitary funaya residence floating quietly on still water at first light, the building occupying the lower third of the frame, vast calm sky and sea filling the upper two-thirds, mirror-like water reflection, extreme tranquility, cinematic negative space --ar 21:9 [共通ネガティブ]
+Editorial architectural photography of a renovated traditional Japanese funaya boathouse residence in Ine, Kyoto, built directly above calm coastal water, weathered charcoal-black yakisugi charred cedar exterior siding, aged timber beams and posts with visible grain, minimalist Japanese interior with Scandinavian warmth, abundant negative space, quiet contemplative mood, soft natural light, muted sand and slate-grey color palette with near-black wood accents, medium format film photography, subtle film grain, low contrast, no oversaturation, luxury travel magazine editorial style, serene and understated, a low-angle view at water level facing a solitary funaya residence floating quietly on still water at first light, the building occupying the lower third of the frame, vast calm sky and sea filling the upper two-thirds, mirror-like water reflection, extreme tranquility, cinematic negative space --ar 21:9 --v 6.1 --style raw --no tropical resort, Bali style, Hawaiian style, Dubai style, glass modern villa, flashy luxury hotel, over-styled staging, futuristic AI architecture, neon colors, oversaturated colors, visible logos, text, watermark, posed model, visible faces looking at camera
 ```
 
 #### 2. ドローン全景
@@ -86,8 +88,9 @@ Editorial architectural photography of a renovated traditional Japanese funaya b
 - **狙い**：伊根の入江と集落における建築のスケール感・立地の希少性を伝える。
 - **構図**：真上よりやや斜めのドローン俯瞰。周囲の入江・山の稜線を含める。
 - **推奨アスペクト比**：16:9
+
 ```
-[共通ベース] + a high aerial drone view of a secluded cove in Ine, Kyoto, a single renovated funaya boathouse residence built over the water at the edge of a traditional boathouse village, dark timber roofs, calm turquoise-grey inlet water, forested mountain ridges surrounding the bay, soft dawn haze --ar 16:9 [共通ネガティブ]
+Editorial architectural photography of a renovated traditional Japanese funaya boathouse residence in Ine, Kyoto, built directly above calm coastal water, weathered charcoal-black yakisugi charred cedar exterior siding, aged timber beams and posts with visible grain, minimalist Japanese interior with Scandinavian warmth, abundant negative space, quiet contemplative mood, soft natural light, muted sand and slate-grey color palette with near-black wood accents, medium format film photography, subtle film grain, low contrast, no oversaturation, luxury travel magazine editorial style, serene and understated, a high aerial drone view of a secluded cove in Ine, Kyoto, a single renovated funaya boathouse residence built over the water at the edge of a traditional boathouse village, dark timber roofs, calm turquoise-grey inlet water, forested mountain ridges surrounding the bay, soft dawn haze --ar 16:9 --v 6.1 --style raw --no tropical resort, Bali style, Hawaiian style, Dubai style, glass modern villa, flashy luxury hotel, over-styled staging, futuristic AI architecture, neon colors, oversaturated colors, visible logos, text, watermark, posed model, visible faces looking at camera
 ```
 
 #### 3. 夕景
@@ -95,8 +98,9 @@ Editorial architectural photography of a renovated traditional Japanese funaya b
 - **狙い**：一日の終わり、都市の喧騒からの解放を象徴。
 - **構図**：デッキテラスから海を見た視点。シルエットのみの人物の後ろ姿を遠景に小さく。
 - **推奨アスペクト比**：16:9
+
 ```
-[共通ベース] + view from a wooden deck terrace at dusk, warm orange and deep indigo sunset light over calm water, a small distant silhouette of a person sitting alone facing the sea, wooden deck chair, steam rising from a cup, extreme quietness --ar 16:9 [共通ネガティブ]
+Editorial architectural photography of a renovated traditional Japanese funaya boathouse residence in Ine, Kyoto, built directly above calm coastal water, weathered charcoal-black yakisugi charred cedar exterior siding, aged timber beams and posts with visible grain, minimalist Japanese interior with Scandinavian warmth, abundant negative space, quiet contemplative mood, soft natural light, muted sand and slate-grey color palette with near-black wood accents, medium format film photography, subtle film grain, low contrast, no oversaturation, luxury travel magazine editorial style, serene and understated, view from a wooden deck terrace at dusk, warm orange and deep indigo sunset light over calm water, a small distant silhouette of a person sitting alone facing the sea, wooden deck chair, steam rising from a cup, extreme quietness --ar 16:9 --v 6.1 --style raw --no tropical resort, Bali style, Hawaiian style, Dubai style, glass modern villa, flashy luxury hotel, over-styled staging, futuristic AI architecture, neon colors, oversaturated colors, visible logos, text, watermark, posed model, visible faces looking at camera
 ```
 
 #### 4. 朝景
@@ -104,8 +108,9 @@ Editorial architectural photography of a renovated traditional Japanese funaya b
 - **狙い**：目覚めの静けさ、一日の始まりの余白。
 - **構図**：室内から障子越しに見える朝の海。
 - **推奨アスペクト比**：16:9
+
 ```
-[共通ベース] + soft morning light filtering through a paper shoji screen door, a sliver of calm sea and misty mountains visible through the half-open door, steam from a teacup on a low wooden table in the foreground, muted cool morning tones --ar 16:9 [共通ネガティブ]
+Editorial architectural photography of a renovated traditional Japanese funaya boathouse residence in Ine, Kyoto, built directly above calm coastal water, weathered charcoal-black yakisugi charred cedar exterior siding, aged timber beams and posts with visible grain, minimalist Japanese interior with Scandinavian warmth, abundant negative space, quiet contemplative mood, soft natural light, muted sand and slate-grey color palette with near-black wood accents, medium format film photography, subtle film grain, low contrast, no oversaturation, luxury travel magazine editorial style, serene and understated, soft morning light filtering through a paper shoji screen door, a sliver of calm sea and misty mountains visible through the half-open door, steam from a teacup on a low wooden table in the foreground, muted cool morning tones --ar 16:9 --v 6.1 --style raw --no tropical resort, Bali style, Hawaiian style, Dubai style, glass modern villa, flashy luxury hotel, over-styled staging, futuristic AI architecture, neon colors, oversaturated colors, visible logos, text, watermark, posed model, visible faces looking at camera
 ```
 
 #### 5. テラス
@@ -113,8 +118,9 @@ Editorial architectural photography of a renovated traditional Japanese funaya b
 - **狙い**：デッキテラスという設備そのものの訴求。
 - **構図**：テラス全体が分かる引きの構図、海と直結している一体感。
 - **推奨アスペクト比**：3:2
+
 ```
-[共通ベース] + a wide wooden deck terrace extending directly over the water from the funaya residence, built-in low bench seating, a single linen cushion, unobstructed view of the calm bay, no railings blocking the horizon, minimal furniture --ar 3:2 [共通ネガティブ]
+Editorial architectural photography of a renovated traditional Japanese funaya boathouse residence in Ine, Kyoto, built directly above calm coastal water, weathered charcoal-black yakisugi charred cedar exterior siding, aged timber beams and posts with visible grain, minimalist Japanese interior with Scandinavian warmth, abundant negative space, quiet contemplative mood, soft natural light, muted sand and slate-grey color palette with near-black wood accents, medium format film photography, subtle film grain, low contrast, no oversaturation, luxury travel magazine editorial style, serene and understated, a wide wooden deck terrace extending directly over the water from the funaya residence, built-in low bench seating, a single linen cushion, unobstructed view of the calm bay, no railings blocking the horizon, minimal furniture --ar 3:2 --v 6.1 --style raw --no tropical resort, Bali style, Hawaiian style, Dubai style, glass modern villa, flashy luxury hotel, over-styled staging, futuristic AI architecture, neon colors, oversaturated colors, visible logos, text, watermark, posed model, visible faces looking at camera
 ```
 
 ---
@@ -126,8 +132,9 @@ Editorial architectural photography of a renovated traditional Japanese funaya b
 - **狙い**：「海の上に建つ木造建築」という核となる資産性の証明カット。
 - **構図**：正面やや低い位置から、建物全体と水面への浮遊感を強調。
 - **推奨アスペクト比**：4:5
+
 ```
-[共通ベース] + full elevation view from the water of a funaya boathouse residence, dark yakisugi cedar cladding, the lower level open directly to the water for boat mooring, upper level renovated with large timber-framed windows, calm reflective water beneath the structure --ar 4:5 [共通ネガティブ]
+Editorial architectural photography of a renovated traditional Japanese funaya boathouse residence in Ine, Kyoto, built directly above calm coastal water, weathered charcoal-black yakisugi charred cedar exterior siding, aged timber beams and posts with visible grain, minimalist Japanese interior with Scandinavian warmth, abundant negative space, quiet contemplative mood, soft natural light, muted sand and slate-grey color palette with near-black wood accents, medium format film photography, subtle film grain, low contrast, no oversaturation, luxury travel magazine editorial style, serene and understated, full elevation view from the water of a funaya boathouse residence, dark yakisugi cedar cladding, the lower level open directly to the water for boat mooring, upper level renovated with large timber-framed windows, calm reflective water beneath the structure --ar 4:5 --v 6.1 --style raw --no tropical resort, Bali style, Hawaiian style, Dubai style, glass modern villa, flashy luxury hotel, over-styled staging, futuristic AI architecture, neon colors, oversaturated colors, visible logos, text, watermark, posed model, visible faces looking at camera
 ```
 
 #### 7. 正面外観
@@ -135,8 +142,9 @@ Editorial architectural photography of a renovated traditional Japanese funaya b
 - **狙い**：陸側からのアプローチ、集落の一部としての佇まい。
 - **構図**：石畳の小径から見た正面ファサード。
 - **推奨アスペクト比**：4:5
+
 ```
-[共通ベース] + front facade view from a narrow stone pathway in a traditional Japanese boathouse village, weathered dark wood entrance, simple unmarked wooden door, small potted plant by the entrance, quiet residential street atmosphere --ar 4:5 [共通ネガティブ]
+Editorial architectural photography of a renovated traditional Japanese funaya boathouse residence in Ine, Kyoto, built directly above calm coastal water, weathered charcoal-black yakisugi charred cedar exterior siding, aged timber beams and posts with visible grain, minimalist Japanese interior with Scandinavian warmth, abundant negative space, quiet contemplative mood, soft natural light, muted sand and slate-grey color palette with near-black wood accents, medium format film photography, subtle film grain, low contrast, no oversaturation, luxury travel magazine editorial style, serene and understated, front facade view from a narrow stone pathway in a traditional Japanese boathouse village, weathered dark wood entrance, simple unmarked wooden door, small potted plant by the entrance, quiet residential street atmosphere --ar 4:5 --v 6.1 --style raw --no tropical resort, Bali style, Hawaiian style, Dubai style, glass modern villa, flashy luxury hotel, over-styled staging, futuristic AI architecture, neon colors, oversaturated colors, visible logos, text, watermark, posed model, visible faces looking at camera
 ```
 
 #### 8. ボート係留シーン
@@ -144,8 +152,9 @@ Editorial architectural photography of a renovated traditional Japanese funaya b
 - **狙い**：「ボート係留可能」という機能の情緒的な訴求。
 - **構図**：建物1階の係留スペースを内側から見た構図、光と影のコントラスト。
 - **推奨アスペクト比**：4:5
+
 ```
-[共通ベース] + interior view of a traditional boat garage beneath the residence, a small wooden boat moored quietly inside, dark timber structure, soft daylight entering from the open water-side opening, reflections of light on the water surface and ceiling beams --ar 4:5 [共通ネガティブ]
+Editorial architectural photography of a renovated traditional Japanese funaya boathouse residence in Ine, Kyoto, built directly above calm coastal water, weathered charcoal-black yakisugi charred cedar exterior siding, aged timber beams and posts with visible grain, minimalist Japanese interior with Scandinavian warmth, abundant negative space, quiet contemplative mood, soft natural light, muted sand and slate-grey color palette with near-black wood accents, medium format film photography, subtle film grain, low contrast, no oversaturation, luxury travel magazine editorial style, serene and understated, interior view of a traditional boat garage beneath the residence, a small wooden boat moored quietly inside, dark timber structure, soft daylight entering from the open water-side opening, reflections of light on the water surface and ceiling beams --ar 4:5 --v 6.1 --style raw --no tropical resort, Bali style, Hawaiian style, Dubai style, glass modern villa, flashy luxury hotel, over-styled staging, futuristic AI architecture, neon colors, oversaturated colors, visible logos, text, watermark, posed model, visible faces looking at camera
 ```
 
 #### 9. 集落との一体感
@@ -153,8 +162,9 @@ Editorial architectural photography of a renovated traditional Japanese funaya b
 - **狙い**：伊根の歴史的景観を壊さず溶け込んでいることの証明。
 - **構図**：隣接する伝統的な舟屋群と並んだ引きの外観カット。
 - **推奨アスペクト比**：16:9
+
 ```
-[共通ベース] + a row of traditional funaya boathouses along a calm inlet in Ine, Kyoto, the renovated residence indistinguishable in exterior style from its historic neighbors, consistent dark timber and tile roofline, gentle morning mist over the water --ar 16:9 [共通ネガティブ]
+Editorial architectural photography of a renovated traditional Japanese funaya boathouse residence in Ine, Kyoto, built directly above calm coastal water, weathered charcoal-black yakisugi charred cedar exterior siding, aged timber beams and posts with visible grain, minimalist Japanese interior with Scandinavian warmth, abundant negative space, quiet contemplative mood, soft natural light, muted sand and slate-grey color palette with near-black wood accents, medium format film photography, subtle film grain, low contrast, no oversaturation, luxury travel magazine editorial style, serene and understated, a row of traditional funaya boathouses along a calm inlet in Ine, Kyoto, the renovated residence indistinguishable in exterior style from its historic neighbors, consistent dark timber and tile roofline, gentle morning mist over the water --ar 16:9 --v 6.1 --style raw --no tropical resort, Bali style, Hawaiian style, Dubai style, glass modern villa, flashy luxury hotel, over-styled staging, futuristic AI architecture, neon colors, oversaturated colors, visible logos, text, watermark, posed model, visible faces looking at camera
 ```
 
 ---
@@ -166,8 +176,9 @@ Editorial architectural photography of a renovated traditional Japanese funaya b
 - **狙い**：北欧的な温かみ×日本建築の静けさの融合。
 - **構図**：低い目線、窓の外の海が主題になるよう家具は最小限。
 - **推奨アスペクト比**：4:5
+
 ```
-[共通ベース] + a minimalist living room interior with exposed aged timber beams, a low linen sofa, a single wool throw, warm wood flooring, large window framing a calm sea view, Scandinavian-Japanese fusion furniture, soft diffused daylight --ar 4:5 [共通ネガティブ]
+Editorial architectural photography of a renovated traditional Japanese funaya boathouse residence in Ine, Kyoto, built directly above calm coastal water, weathered charcoal-black yakisugi charred cedar exterior siding, aged timber beams and posts with visible grain, minimalist Japanese interior with Scandinavian warmth, abundant negative space, quiet contemplative mood, soft natural light, muted sand and slate-grey color palette with near-black wood accents, medium format film photography, subtle film grain, low contrast, no oversaturation, luxury travel magazine editorial style, serene and understated, a minimalist living room interior with exposed aged timber beams, a low linen sofa, a single wool throw, warm wood flooring, large window framing a calm sea view, Scandinavian-Japanese fusion furniture, soft diffused daylight --ar 4:5 --v 6.1 --style raw --no tropical resort, Bali style, Hawaiian style, Dubai style, glass modern villa, flashy luxury hotel, over-styled staging, futuristic AI architecture, neon colors, oversaturated colors, visible logos, text, watermark, posed model, visible faces looking at camera
 ```
 
 #### 11. ダイニング
@@ -175,8 +186,9 @@ Editorial architectural photography of a renovated traditional Japanese funaya b
 - **狙い**：6名で囲める食卓、静かな団らんの余白。
 - **構図**：長机を横から見た構図、海の光が差し込む。
 - **推奨アスペクト比**：4:5
+
 ```
-[共通ベース] + a long solid wood dining table for six with simple wooden chairs, minimal ceramic tableware, soft natural side light from a nearby window overlooking the sea, warm and unhurried atmosphere, no people seated --ar 4:5 [共通ネガティブ]
+Editorial architectural photography of a renovated traditional Japanese funaya boathouse residence in Ine, Kyoto, built directly above calm coastal water, weathered charcoal-black yakisugi charred cedar exterior siding, aged timber beams and posts with visible grain, minimalist Japanese interior with Scandinavian warmth, abundant negative space, quiet contemplative mood, soft natural light, muted sand and slate-grey color palette with near-black wood accents, medium format film photography, subtle film grain, low contrast, no oversaturation, luxury travel magazine editorial style, serene and understated, a long solid wood dining table for six with simple wooden chairs, minimal ceramic tableware, soft natural side light from a nearby window overlooking the sea, warm and unhurried atmosphere, no people seated --ar 4:5 --v 6.1 --style raw --no tropical resort, Bali style, Hawaiian style, Dubai style, glass modern villa, flashy luxury hotel, over-styled staging, futuristic AI architecture, neon colors, oversaturated colors, visible logos, text, watermark, posed model, visible faces looking at camera
 ```
 
 #### 12. キッチン
@@ -184,8 +196,9 @@ Editorial architectural photography of a renovated traditional Japanese funaya b
 - **狙い**：上質だが生活感のある道具の質感。
 - **構図**：作業台のクローズアップ寄り、道具の陰影を活かす。
 - **推奨アスペクト比**：4:5
+
 ```
-[共通ベース] + a minimalist kitchen counter with natural stone and dark wood surfaces, a few carefully chosen ceramic and iron cooking tools, soft morning light from a window above the sink, quiet still-life composition, no people --ar 4:5 [共通ネガティブ]
+Editorial architectural photography of a renovated traditional Japanese funaya boathouse residence in Ine, Kyoto, built directly above calm coastal water, weathered charcoal-black yakisugi charred cedar exterior siding, aged timber beams and posts with visible grain, minimalist Japanese interior with Scandinavian warmth, abundant negative space, quiet contemplative mood, soft natural light, muted sand and slate-grey color palette with near-black wood accents, medium format film photography, subtle film grain, low contrast, no oversaturation, luxury travel magazine editorial style, serene and understated, a minimalist kitchen counter with natural stone and dark wood surfaces, a few carefully chosen ceramic and iron cooking tools, soft morning light from a window above the sink, quiet still-life composition, no people --ar 4:5 --v 6.1 --style raw --no tropical resort, Bali style, Hawaiian style, Dubai style, glass modern villa, flashy luxury hotel, over-styled staging, futuristic AI architecture, neon colors, oversaturated colors, visible logos, text, watermark, posed model, visible faces looking at camera
 ```
 
 #### 13. 主寝室
@@ -193,8 +206,9 @@ Editorial architectural photography of a renovated traditional Japanese funaya b
 - **狙い**：静養の質、上質な寝具のテクスチャー。
 - **構図**：ベッドと窓の海景を対角線上に配置。
 - **推奨アスペクト比**：4:5
+
 ```
-[共通ベース] + a serene primary bedroom with a low platform bed, natural linen bedding in muted tones, exposed timber ceiling beams, a large window with a calm sea view, soft early morning light, minimal decor --ar 4:5 [共通ネガティブ]
+Editorial architectural photography of a renovated traditional Japanese funaya boathouse residence in Ine, Kyoto, built directly above calm coastal water, weathered charcoal-black yakisugi charred cedar exterior siding, aged timber beams and posts with visible grain, minimalist Japanese interior with Scandinavian warmth, abundant negative space, quiet contemplative mood, soft natural light, muted sand and slate-grey color palette with near-black wood accents, medium format film photography, subtle film grain, low contrast, no oversaturation, luxury travel magazine editorial style, serene and understated, a serene primary bedroom with a low platform bed, natural linen bedding in muted tones, exposed timber ceiling beams, a large window with a calm sea view, soft early morning light, minimal decor --ar 4:5 --v 6.1 --style raw --no tropical resort, Bali style, Hawaiian style, Dubai style, glass modern villa, flashy luxury hotel, over-styled staging, futuristic AI architecture, neon colors, oversaturated colors, visible logos, text, watermark, posed model, visible faces looking at camera
 ```
 
 #### 14. セカンドベッドルーム
@@ -202,8 +216,9 @@ Editorial architectural photography of a renovated traditional Japanese funaya b
 - **狙い**：主寝室と差別化しつつ同じ世界観であることを示す。
 - **構図**：やや小ぶりな空間、障子越しの柔らかい光。
 - **推奨アスペクト比**：4:5
+
 ```
-[共通ベース] + a smaller secondary bedroom with twin low wooden beds, simple linen bedding, a paper shoji screen window diffusing soft daylight, minimal Japanese-Scandinavian furniture, calm and understated --ar 4:5 [共通ネガティブ]
+Editorial architectural photography of a renovated traditional Japanese funaya boathouse residence in Ine, Kyoto, built directly above calm coastal water, weathered charcoal-black yakisugi charred cedar exterior siding, aged timber beams and posts with visible grain, minimalist Japanese interior with Scandinavian warmth, abundant negative space, quiet contemplative mood, soft natural light, muted sand and slate-grey color palette with near-black wood accents, medium format film photography, subtle film grain, low contrast, no oversaturation, luxury travel magazine editorial style, serene and understated, a smaller secondary bedroom with twin low wooden beds, simple linen bedding, a paper shoji screen window diffusing soft daylight, minimal Japanese-Scandinavian furniture, calm and understated --ar 4:5 --v 6.1 --style raw --no tropical resort, Bali style, Hawaiian style, Dubai style, glass modern villa, flashy luxury hotel, over-styled staging, futuristic AI architecture, neon colors, oversaturated colors, visible logos, text, watermark, posed model, visible faces looking at camera
 ```
 
 #### 15. バスルーム
@@ -211,8 +226,9 @@ Editorial architectural photography of a renovated traditional Japanese funaya b
 - **狙い**：ウェルネス訴求（サウナ的な質感含む）。
 - **構図**：石・木・湯気のテクスチャーを主役に。
 - **推奨アスペクト比**：4:5
+
 ```
-[共通ベース] + a minimalist bathroom with a natural stone soaking tub, dark wood sauna-style paneling, soft steam in the air, a small window with a glimpse of the sea, warm indirect lighting, spa-like tranquility --ar 4:5 [共通ネガティブ]
+Editorial architectural photography of a renovated traditional Japanese funaya boathouse residence in Ine, Kyoto, built directly above calm coastal water, weathered charcoal-black yakisugi charred cedar exterior siding, aged timber beams and posts with visible grain, minimalist Japanese interior with Scandinavian warmth, abundant negative space, quiet contemplative mood, soft natural light, muted sand and slate-grey color palette with near-black wood accents, medium format film photography, subtle film grain, low contrast, no oversaturation, luxury travel magazine editorial style, serene and understated, a minimalist bathroom with a natural stone soaking tub, dark wood sauna-style paneling, soft steam in the air, a small window with a glimpse of the sea, warm indirect lighting, spa-like tranquility --ar 4:5 --v 6.1 --style raw --no tropical resort, Bali style, Hawaiian style, Dubai style, glass modern villa, flashy luxury hotel, over-styled staging, futuristic AI architecture, neon colors, oversaturated colors, visible logos, text, watermark, posed model, visible faces looking at camera
 ```
 
 ---
@@ -224,8 +240,9 @@ Editorial architectural photography of a renovated traditional Japanese funaya b
 - **狙い**：「何もしない贅沢」の象徴カット。
 - **構図**：手元と湯気のクローズアップ、背景は大きくぼかした海。
 - **推奨アスペクト比**：4:5
+
 ```
-[共通ベース] + close-up of hands holding a simple ceramic coffee cup with steam rising, soft morning light, a blurred calm sea visible in the background through a window, quiet unhurried moment, no visible face --ar 4:5 [共通ネガティブ]
+Editorial architectural photography of a renovated traditional Japanese funaya boathouse residence in Ine, Kyoto, built directly above calm coastal water, weathered charcoal-black yakisugi charred cedar exterior siding, aged timber beams and posts with visible grain, minimalist Japanese interior with Scandinavian warmth, abundant negative space, quiet contemplative mood, soft natural light, muted sand and slate-grey color palette with near-black wood accents, medium format film photography, subtle film grain, low contrast, no oversaturation, luxury travel magazine editorial style, serene and understated, close-up of hands holding a simple ceramic coffee cup with steam rising, soft morning light, a blurred calm sea visible in the background through a window, quiet unhurried moment, no visible face --ar 4:5 --v 6.1 --style raw --no tropical resort, Bali style, Hawaiian style, Dubai style, glass modern villa, flashy luxury hotel, over-styled staging, futuristic AI architecture, neon colors, oversaturated colors, visible logos, text, watermark, posed model, visible faces looking at camera
 ```
 
 #### 17. 読書
@@ -233,8 +250,9 @@ Editorial architectural photography of a renovated traditional Japanese funaya b
 - **狙い**：静養・自分の時間の質。
 - **構図**：デッキチェアに座る人物の後ろ姿・遠景シルエット。
 - **推奨アスペクト比**：4:5
+
 ```
-[共通ベース] + a distant back-view silhouette of a person reading a book in a low wooden deck chair facing the sea, soft afternoon light, open book, minimal styling, extreme calm, no visible face --ar 4:5 [共通ネガティブ]
+Editorial architectural photography of a renovated traditional Japanese funaya boathouse residence in Ine, Kyoto, built directly above calm coastal water, weathered charcoal-black yakisugi charred cedar exterior siding, aged timber beams and posts with visible grain, minimalist Japanese interior with Scandinavian warmth, abundant negative space, quiet contemplative mood, soft natural light, muted sand and slate-grey color palette with near-black wood accents, medium format film photography, subtle film grain, low contrast, no oversaturation, luxury travel magazine editorial style, serene and understated, a distant back-view silhouette of a person reading a book in a low wooden deck chair facing the sea, soft afternoon light, open book, minimal styling, extreme calm, no visible face --ar 4:5 --v 6.1 --style raw --no tropical resort, Bali style, Hawaiian style, Dubai style, glass modern villa, flashy luxury hotel, over-styled staging, futuristic AI architecture, neon colors, oversaturated colors, visible logos, text, watermark, posed model, visible faces looking at camera
 ```
 
 #### 18. 瞑想
@@ -242,8 +260,9 @@ Editorial architectural photography of a renovated traditional Japanese funaya b
 - **狙い**：ウェルネスリトリートとしての精神性。
 - **構図**：畳やデッキに座る後ろ姿、水平線と同じ高さの目線。
 - **推奨アスペクト比**：4:5
+
 ```
-[共通ベース] + a distant back-view silhouette of a person sitting cross-legged in quiet meditation on a wooden deck facing the calm sea at dawn, soft misty light, minimal composition, extreme stillness, no visible face --ar 4:5 [共通ネガティブ]
+Editorial architectural photography of a renovated traditional Japanese funaya boathouse residence in Ine, Kyoto, built directly above calm coastal water, weathered charcoal-black yakisugi charred cedar exterior siding, aged timber beams and posts with visible grain, minimalist Japanese interior with Scandinavian warmth, abundant negative space, quiet contemplative mood, soft natural light, muted sand and slate-grey color palette with near-black wood accents, medium format film photography, subtle film grain, low contrast, no oversaturation, luxury travel magazine editorial style, serene and understated, a distant back-view silhouette of a person sitting cross-legged in quiet meditation on a wooden deck facing the calm sea at dawn, soft misty light, minimal composition, extreme stillness, no visible face --ar 4:5 --v 6.1 --style raw --no tropical resort, Bali style, Hawaiian style, Dubai style, glass modern villa, flashy luxury hotel, over-styled staging, futuristic AI architecture, neon colors, oversaturated colors, visible logos, text, watermark, posed model, visible faces looking at camera
 ```
 
 #### 19. 海を眺める時間
@@ -251,8 +270,9 @@ Editorial architectural photography of a renovated traditional Japanese funaya b
 - **狙い**：「何もしない」時間そのものの可視化。
 - **構図**：大きな窓辺、椅子は一脚のみ、人物なしでも成立する構図。
 - **推奨アスペクト比**：3:2
+
 ```
-[共通ベース] + a single simple wooden chair positioned by a large window overlooking a calm sea, soft afternoon light, empty and inviting, a folded blanket draped over the armrest, extreme minimalism and negative space, no people --ar 3:2 [共通ネガティブ]
+Editorial architectural photography of a renovated traditional Japanese funaya boathouse residence in Ine, Kyoto, built directly above calm coastal water, weathered charcoal-black yakisugi charred cedar exterior siding, aged timber beams and posts with visible grain, minimalist Japanese interior with Scandinavian warmth, abundant negative space, quiet contemplative mood, soft natural light, muted sand and slate-grey color palette with near-black wood accents, medium format film photography, subtle film grain, low contrast, no oversaturation, luxury travel magazine editorial style, serene and understated, a single simple wooden chair positioned by a large window overlooking a calm sea, soft afternoon light, empty and inviting, a folded blanket draped over the armrest, extreme minimalism and negative space, no people --ar 3:2 --v 6.1 --style raw --no tropical resort, Bali style, Hawaiian style, Dubai style, glass modern villa, flashy luxury hotel, over-styled staging, futuristic AI architecture, neon colors, oversaturated colors, visible logos, text, watermark, posed model, visible faces looking at camera
 ```
 
 #### 20. デジタルデトックス
@@ -260,8 +280,9 @@ Editorial architectural photography of a renovated traditional Japanese funaya b
 - **狙い**：都市からの切断、静けさへの回帰。
 - **構図**：閉じたノートと置かれたスマートフォン、自然物との対比。
 - **推奨アスペクト比**：4:5
+
 ```
-[共通ベース] + a closed notebook and a phone placed face-down on a low wooden table, next to a small branch of pine and a lit candle, soft evening light, quiet symbolic still life about disconnecting from the city, no people --ar 4:5 [共通ネガティブ]
+Editorial architectural photography of a renovated traditional Japanese funaya boathouse residence in Ine, Kyoto, built directly above calm coastal water, weathered charcoal-black yakisugi charred cedar exterior siding, aged timber beams and posts with visible grain, minimalist Japanese interior with Scandinavian warmth, abundant negative space, quiet contemplative mood, soft natural light, muted sand and slate-grey color palette with near-black wood accents, medium format film photography, subtle film grain, low contrast, no oversaturation, luxury travel magazine editorial style, serene and understated, a closed notebook and a phone placed face-down on a low wooden table, next to a small branch of pine and a lit candle, soft evening light, quiet symbolic still life about disconnecting from the city, no people --ar 4:5 --v 6.1 --style raw --no tropical resort, Bali style, Hawaiian style, Dubai style, glass modern villa, flashy luxury hotel, over-styled staging, futuristic AI architecture, neon colors, oversaturated colors, visible logos, text, watermark, posed model, visible faces looking at camera
 ```
 
 ---
@@ -273,8 +294,9 @@ Editorial architectural photography of a renovated traditional Japanese funaya b
 - **狙い**：定員6名という規模感を、賑やかすぎず上質に見せる。
 - **構図**：デッキやリビングでの緩やかな団らん、全員が同じ方向を向いていない自然な配置。
 - **推奨アスペクト比**：3:2
+
 ```
-[共通ベース] + a small group of six friends gathered loosely on a wooden deck terrace at golden hour, relaxed candid postures, some standing near the water's edge, some seated, distant and softly lit, no posed group photo composition, no visible faces in focus --ar 3:2 [共通ネガティブ]
+Editorial architectural photography of a renovated traditional Japanese funaya boathouse residence in Ine, Kyoto, built directly above calm coastal water, weathered charcoal-black yakisugi charred cedar exterior siding, aged timber beams and posts with visible grain, minimalist Japanese interior with Scandinavian warmth, abundant negative space, quiet contemplative mood, soft natural light, muted sand and slate-grey color palette with near-black wood accents, medium format film photography, subtle film grain, low contrast, no oversaturation, luxury travel magazine editorial style, serene and understated, a small group of six friends gathered loosely on a wooden deck terrace at golden hour, relaxed candid postures, some standing near the water's edge, some seated, distant and softly lit, no posed group photo composition, no visible faces in focus --ar 3:2 --v 6.1 --style raw --no tropical resort, Bali style, Hawaiian style, Dubai style, glass modern villa, flashy luxury hotel, over-styled staging, futuristic AI architecture, neon colors, oversaturated colors, visible logos, text, watermark, posed model, visible faces looking at camera
 ```
 
 #### 22. ワーケーション
@@ -282,8 +304,9 @@ Editorial architectural photography of a renovated traditional Japanese funaya b
 - **狙い**：都市部経営者層への実用的な訴求（静かな仕事環境）。
 - **構図**：ノートパソコンと海を同一フレームに、緊張感のない配置。
 - **推奨アスペクト比**：4:5
+
 ```
-[共通ベース] + a laptop closed or resting quietly on a low wooden desk positioned beside a large window with a calm sea view, a notebook and pen nearby, soft daylight, unhurried and quiet working atmosphere, no people --ar 4:5 [共通ネガティブ]
+Editorial architectural photography of a renovated traditional Japanese funaya boathouse residence in Ine, Kyoto, built directly above calm coastal water, weathered charcoal-black yakisugi charred cedar exterior siding, aged timber beams and posts with visible grain, minimalist Japanese interior with Scandinavian warmth, abundant negative space, quiet contemplative mood, soft natural light, muted sand and slate-grey color palette with near-black wood accents, medium format film photography, subtle film grain, low contrast, no oversaturation, luxury travel magazine editorial style, serene and understated, a laptop closed or resting quietly on a low wooden desk positioned beside a large window with a calm sea view, a notebook and pen nearby, soft daylight, unhurried and quiet working atmosphere, no people --ar 4:5 --v 6.1 --style raw --no tropical resort, Bali style, Hawaiian style, Dubai style, glass modern villa, flashy luxury hotel, over-styled staging, futuristic AI architecture, neon colors, oversaturated colors, visible logos, text, watermark, posed model, visible faces looking at camera
 ```
 
 #### 23. ボート体験
@@ -291,8 +314,9 @@ Editorial architectural photography of a renovated traditional Japanese funaya b
 - **狙い**：ボート係留の実用性を体験価値として見せる。
 - **構図**：桟橋から見た、乗船前後の静かな一瞬。
 - **推奨アスペクト比**：3:2
+
 ```
-[共通ベース] + a small wooden boat gently moored at a private jetty beside the funaya residence, a distant figure stepping aboard, calm reflective water, soft morning light, quiet anticipation rather than action, no visible face --ar 3:2 [共通ネガティブ]
+Editorial architectural photography of a renovated traditional Japanese funaya boathouse residence in Ine, Kyoto, built directly above calm coastal water, weathered charcoal-black yakisugi charred cedar exterior siding, aged timber beams and posts with visible grain, minimalist Japanese interior with Scandinavian warmth, abundant negative space, quiet contemplative mood, soft natural light, muted sand and slate-grey color palette with near-black wood accents, medium format film photography, subtle film grain, low contrast, no oversaturation, luxury travel magazine editorial style, serene and understated, a small wooden boat gently moored at a private jetty beside the funaya residence, a distant figure stepping aboard, calm reflective water, soft morning light, quiet anticipation rather than action, no visible face --ar 3:2 --v 6.1 --style raw --no tropical resort, Bali style, Hawaiian style, Dubai style, glass modern villa, flashy luxury hotel, over-styled staging, futuristic AI architecture, neon colors, oversaturated colors, visible logos, text, watermark, posed model, visible faces looking at camera
 ```
 
 #### 24. サンセットタイム
@@ -300,8 +324,9 @@ Editorial architectural photography of a renovated traditional Japanese funaya b
 - **狙い**：一日のハイライト、感情的な余韻。
 - **構図**：水平線に沈む夕日を中心に、極端に引いた構図。
 - **推奨アスペクト比**：21:9
+
 ```
-[共通ベース] + an extremely wide and quiet view of the sun setting over a calm bay in Ine, Kyoto, the funaya residence as a small dark silhouette at the edge of the frame, vast sky in warm fading gradients, profound stillness --ar 21:9 [共通ネガティブ]
+Editorial architectural photography of a renovated traditional Japanese funaya boathouse residence in Ine, Kyoto, built directly above calm coastal water, weathered charcoal-black yakisugi charred cedar exterior siding, aged timber beams and posts with visible grain, minimalist Japanese interior with Scandinavian warmth, abundant negative space, quiet contemplative mood, soft natural light, muted sand and slate-grey color palette with near-black wood accents, medium format film photography, subtle film grain, low contrast, no oversaturation, luxury travel magazine editorial style, serene and understated, an extremely wide and quiet view of the sun setting over a calm bay in Ine, Kyoto, the funaya residence as a small dark silhouette at the edge of the frame, vast sky in warm fading gradients, profound stillness --ar 21:9 --v 6.1 --style raw --no tropical resort, Bali style, Hawaiian style, Dubai style, glass modern villa, flashy luxury hotel, over-styled staging, futuristic AI architecture, neon colors, oversaturated colors, visible logos, text, watermark, posed model, visible faces looking at camera
 ```
 
 #### 25. 夜の静かな時間
@@ -309,8 +334,9 @@ Editorial architectural photography of a renovated traditional Japanese funaya b
 - **狙い**：夜という「何もしない」時間帯の締めくくり。
 - **構図**：室内の暖色照明が水面に映るカット。
 - **推奨アスペクト比**：16:9
+
 ```
-[共通ベース] + a night exterior view of the funaya residence, warm soft interior lighting glowing through timber-framed windows, gentle reflections on still dark water, a faint crescent moon, extremely quiet and intimate atmosphere --ar 16:9 [共通ネガティブ]
+Editorial architectural photography of a renovated traditional Japanese funaya boathouse residence in Ine, Kyoto, built directly above calm coastal water, weathered charcoal-black yakisugi charred cedar exterior siding, aged timber beams and posts with visible grain, minimalist Japanese interior with Scandinavian warmth, abundant negative space, quiet contemplative mood, soft natural light, muted sand and slate-grey color palette with near-black wood accents, medium format film photography, subtle film grain, low contrast, no oversaturation, luxury travel magazine editorial style, serene and understated, a night exterior view of the funaya residence, warm soft interior lighting glowing through timber-framed windows, gentle reflections on still dark water, a faint crescent moon, extremely quiet and intimate atmosphere --ar 16:9 --v 6.1 --style raw --no tropical resort, Bali style, Hawaiian style, Dubai style, glass modern villa, flashy luxury hotel, over-styled staging, futuristic AI architecture, neon colors, oversaturated colors, visible logos, text, watermark, posed model, visible faces looking at camera
 ```
 
 ---
