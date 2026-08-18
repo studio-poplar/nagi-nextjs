@@ -13,7 +13,6 @@ export interface Location {
   tags: string[];
   mood: SceneMood;
   landmark: SceneLandmark;
-  showBoat?: boolean;
   sunPosition: { top: string; left: string; size: number };
   access: string;
   capacity: string;
