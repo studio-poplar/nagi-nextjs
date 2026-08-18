@@ -170,6 +170,7 @@
       ],
       "mood": "dawn",
       "landmark": "pier",
+      "showBoat": true,
       "sunPosition": {
         "top": "10%",
         "left": "66%",
