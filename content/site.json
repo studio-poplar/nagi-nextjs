@@ -33,7 +33,7 @@
       "metaLine2": "本日の凪 — 内房 波高 0.3m",
       "overlayOpacity": 0.05,
       "textColor": "",
-      "textBackgroundOpacity": 0.05,
+      "textBackgroundOpacity": 0.1,
       "textBackgroundColor": "#dadfe1"
     },
     "concept": {
