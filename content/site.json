@@ -32,9 +32,9 @@
       "metaLine1": "四拠点 / UCHIBO・NOTO・AWAJI・GOTO",
       "metaLine2": "本日の凪 — 内房 波高 0.3m",
       "overlayOpacity": 0.05,
-      "textColor": "",
-      "textBackgroundOpacity": 0.1,
-      "textBackgroundColor": "#dadfe1"
+      "textColor": "#d2cbbc",
+      "textBackgroundOpacity": 0,
+      "textBackgroundColor": "#ffffff"
     },
     "concept": {
       "eyebrow": "THE CONCEPT",
