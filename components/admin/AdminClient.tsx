@@ -5,6 +5,7 @@ import type { SiteData } from "@/lib/content";
 import type { ImageSlot } from "@/lib/images";
 import { ColorField, Field, ListField, RangeField, Section, TextAreaField, setDeep } from "./fields";
 import ImageManager from "./ImageManager";
+import PasswordChangeForm from "./PasswordChangeForm";
 import { errorMessage } from "@/lib/errors";
 
 interface Props {
@@ -60,9 +61,12 @@ export default function AdminClient({ initialData, initialSlots }: Props) {
       <header className="admin-header">
         <div className="admin-header-top">
           <h1>凪 NAGI 管理画面</h1>
-          <button type="button" className="admin-remove-btn" onClick={handleLogout}>
-            ログアウト
-          </button>
+          <div style={{ display: "flex", gap: 8 }}>
+            <PasswordChangeForm />
+            <button type="button" className="admin-remove-btn" onClick={handleLogout}>
+              ログアウト
+            </button>
+          </div>
         </div>
         <p>
           保存すると GitHub リポジトリへ直接コミットされ、Vercelが自動で再デプロイします。反映まで30秒〜1分ほどかかります（保存直後はまだ古い内容が表示されます）。
